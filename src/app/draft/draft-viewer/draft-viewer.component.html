@@ -1,0 +1,20 @@
+<div class="draft-viewer">
+  <div class="loading" *ngIf='!draftData'>
+    Loading draft~
+  </div>
+  <div class="draft" *ngIf='draftData'>
+    {{draftData.draft.drafter}}'s {{draftData.format.name}} Draft
+    <div class="pack" *ngFor='let pack of draftData.draft.packs; let packIndex = index'>
+      <p>{{calculatePackPickString(packIndex)}}</p>
+      <app-card *ngFor='let card of pack; let pickIndex = index'
+        [cardName]='card'
+        [index]='pickIndex'
+        [picked]='draftData.draft.picks[packIndex]===pickIndex'
+      >
+      </app-card>
+    </div>
+
+    
+    
+  </div>
+</div>

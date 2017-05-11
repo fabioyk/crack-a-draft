@@ -1,0 +1,8 @@
+<img class='card-img' 
+     [ngClass]="{pick: picked}"
+     src={{cardImageUrl}} 
+     *ngIf='cardImageUrl'
+     (click)='onClick()'
+     alt={{cardName}}
+     title={{cardName}}
+>

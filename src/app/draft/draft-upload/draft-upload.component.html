@@ -1,0 +1,16 @@
+<div class="file-upload">
+  <div class="upload-form" *ngIf='!draftIds'>
+    <input name='draftUploadField' id='draftUploadField'
+      type="file" (change)="submit($event)" 
+      placeholder="Upload file" 
+      accept=".txt">
+  </div>
+  <div class="files-uploaded" *ngIf='draftIds'>
+    Drafts uploaded:
+    <ul *ngIf='draftIds.length > 1'>
+      <li *ngFor='let draftId of draftIds; let i = index'>
+        <a [routerLink]="['/draft', draftId]" target="_blank">Draft {{i}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
