@@ -8,7 +8,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class CardComponent implements OnInit {
   @Input() cardName: string;
   @Input() picked: boolean;
+  @Input() stats: number;
   cardImageUrl: string;
+  pickrate:string;
   @Input() index: number;
   @Output() cardClicked: EventEmitter<string> =
     new EventEmitter<string>();
@@ -19,11 +21,14 @@ export class CardComponent implements OnInit {
     if (this.cardName) {
       this.cardImageUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&name=' 
         + this.cardName;
-    }    
+    }
+    if (this.stats) {
+      this.pickrate = this.stats.toFixed(2);
+    }
   }
 
   onClick():void {
-    console.log('clicked',this.index);
+    //console.log('clicked',this.index);
     this.cardClicked.emit(this.index.toString());
   }
 

@@ -4,7 +4,6 @@ import { SharedModule } from "app/shared/shared.module";
 import { RouterModule} from '@angular/router';
 
 import { DraftViewerComponent } from "app/draft/draft-viewer/draft-viewer.component";
-import { DraftStatsComponent } from './draft-stats/draft-stats.component';
 import { DraftUploadComponent } from './draft-upload/draft-upload.component';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { DraftUploadComponent } from './draft-upload/draft-upload.component';
   ],
   declarations: [
     DraftViewerComponent,
-    DraftStatsComponent,
     DraftUploadComponent
   ]
 })

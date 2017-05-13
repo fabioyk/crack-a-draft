@@ -1,7 +1,20 @@
+.card-container {
+  position: relative;
+  width: 100%;
+}
+
 .card-img {
   max-width: 170px;
   margin: 7px;
 }
 .pick {
   border: 5px solid red;
+}
+
+h2 { 
+   position: absolute; 
+   top: -100px; 
+   left: 20px; 
+   width: 100%;
+   color: red;
 }

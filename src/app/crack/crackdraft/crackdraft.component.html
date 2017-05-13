@@ -1,0 +1,36 @@
+<div class="crack-draft">
+  <p *ngIf='currentState === 0'>
+    Loading~
+  </p>
+  <div class="draft-area" *ngIf='currentState === 1'>
+    <div class="pack">
+      <p>{{draftData.format.name}} Crack a Draft</p>
+      <p>Pick {{currentPick}}/8:</p>
+      <app-card *ngFor='let card of draftData.draft.packs[currentPick-1]; let pickIndex = index'
+        [cardName]='card'
+        [index]='pickIndex'
+        (cardClicked)='onCardClicked(pickIndex, card)'
+      >
+      </app-card>
+    </div>
+    <div class="picked-cards" *ngIf='myPickedCards.length >= 1'>
+      <p>Picked Cards:</p>
+      <app-card *ngFor='let card of myPickedCards'
+        [cardName]='card.name'>
+      </app-card>
+    </div>
+  </div>
+  <div class="archetype-select" *ngIf='currentState === 2'>
+    <p>Your 8 picks:</p>
+    <app-card *ngFor='let card of myPickedCards'
+        [cardName]='card.name'>
+    </app-card>
+    <p>Which colors do you think you're going to play?<p>
+    <span *ngFor='let colorName of colorNames; let i = index'>   
+      <input type="checkbox" 
+        [checked]="colorCheckboxes[i]" 
+        (change)="colorCheckboxes[i] = $event.target.checked"> {{colorName}}
+    </span>
+    <button (click)='onSubmitCrackDraft()'>Submit Crack a Draft</button>
+  </div>
+</div>

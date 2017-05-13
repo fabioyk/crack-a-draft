@@ -1,0 +1,14 @@
+<div class="format-chooser" *ngIf='formatList'>
+  <label for="draft-selector">Draft Format:</label>
+  <select name="draft-format" 
+          id="draft-selector"
+          (change)='onChange($event.target.value)'>
+    <option *ngFor='let format of formatList'
+            [value]='format.mtgoName+","+format.drafts'>
+      {{format.name}} ({{format.drafts}} drafts)
+    </option>
+  </select>
+  <button (click)='onSubmit()'>Crack a draft!</button>
+
+  {{errorMessage}}
+</div>

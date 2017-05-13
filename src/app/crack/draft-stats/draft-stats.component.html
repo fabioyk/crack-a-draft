@@ -1,0 +1,44 @@
+<div class="draft-stats">
+  <div class="loading" *ngIf='!draftData'>
+    <span *ngIf='!errorMessage'>Loading draft~</span>
+    <span *ngIf='errorMessage'>Draft not found</span>    
+  </div>
+  <div *ngIf='draftData && !crackCount'>
+    There are no crack a drafts registered to this draft.
+  </div>
+  <div *ngIf='crackData'>
+    <p>Your 8 picks:</p>
+    <app-card *ngFor='let pick of crackData.picks; let i = index'
+        [cardName]='draftData.draft.packs[i][pick]'>
+    </app-card>
+  </div>
+  <div *ngIf='draftData'>
+    <p>
+      {{draftData.draft.drafter}}'s First 8 picks: <a [routerLink]="['/draft', draftData.draft._id]">Full draft</a>
+    </p>
+    <app-card *ngFor='let pick of (draftData.draft.picks.slice(0,8)); let i = index'
+        [cardName]='draftData.draft.packs[i][pick]'>
+    </app-card>
+
+    <div class="draft">
+      Pick rate:
+
+      <div class="pack" *ngFor='let pack of (draftData.draft.packs.slice(0,8)); let packIndex = index'>
+        <p>{{calculatePackPickString(packIndex)}}</p>
+        <app-card *ngFor='let card of pack; let pickIndex = index'
+          [cardName]='card'
+          [stats]='pickCounts[packIndex][pickIndex]'
+        >
+        </app-card>
+      </div>
+
+      <div class="stats-block">
+        <p>{{archetypeCounts}}</p>
+        <p *ngFor='let color of colorCounts; let i = index'>{{i+1}}: {{color}}</p>
+      </div>
+    </div>
+
+    
+  </div>
+
+</div>

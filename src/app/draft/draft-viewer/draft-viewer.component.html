@@ -1,9 +1,12 @@
 <div class="draft-viewer">
   <div class="loading" *ngIf='!draftData'>
-    Loading draft~
+    <span *ngIf='!errorMessage'>Loading draft~</span>
+    <span *ngIf='errorMessage'>Draft not found</span>    
   </div>
   <div class="draft" *ngIf='draftData'>
-    {{draftData.draft.drafter}}'s {{draftData.format.name}} Draft
+    <p>{{draftData.draft.drafter}}'s {{draftData.format.name}} Draft</p>
+    <p><a [routerLink]="['/crack', draftData.draft._id]" target="_blank">Crack this draft link</a></p>
+
     <div class="pack" *ngFor='let pack of draftData.draft.packs; let packIndex = index'>
       <p>{{calculatePackPickString(packIndex)}}</p>
       <app-card *ngFor='let card of pack; let pickIndex = index'

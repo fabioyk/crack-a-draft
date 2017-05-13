@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { DraftModule } from "app/draft/draft.module";
 
 import { Uploader }      from 'angular2-http-file-upload';
+import { CrackModule } from "app/crack/crack.module";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { Uploader }      from 'angular2-http-file-upload';
     FormsModule,
     HttpModule,
     DraftModule,
+    CrackModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent}
     ])
