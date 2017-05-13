@@ -1,6 +1,7 @@
 .card-img {
-  max-width: 200px;  
+  max-width: 170px;
+  margin: 7px;
 }
 .pick {
-  border: 4px solid red;
+  border: 5px solid red;
 }
