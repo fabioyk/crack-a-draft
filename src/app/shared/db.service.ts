@@ -20,21 +20,38 @@ export class DbService {
   getDraft(draftId:string):Observable<IDraft> {
     return this._http.get(this._apiUrl + 'draft?id=' + draftId)
       .map((response: Response) => <IDraft> response.json())
-      //.do(data => console.log('All: ' +  JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
+  getDrafts(drafter:string, pageSize: number, pageNumber: number):Observable<IDraft[]> {
+    let queryUrl = this._apiUrl + 'draft?pageSize=' + pageSize +'&pageNumber=' + pageNumber;
+    if (drafter) {
+      queryUrl += '&username=' + drafter;
+    }
+    return this._http.get(queryUrl)
+      .map((response: Response) => <IDraft[]> response.json())
+      .catch(this.handleError);
+  }
+
+  getDraftsCount(drafter:string):Observable<any> {
+    let queryUrl = this._apiUrl + 'draft/count';
+    if (drafter) {
+      queryUrl += '?username=' + drafter;
+    }
+    return this._http.get(queryUrl)
+      .map((response: Response) => <any> response.json())
       .catch(this.handleError);
   }
 
   getDraftByFormat(format:string):Observable<IDraft> {
     return this._http.get(this._apiUrl + 'draft?format=' + format)
       .map((response: Response) => <IDraft> response.json())
-      //.do(data => console.log('All: ' +  JSON.stringify(data)))
       .catch(this.handleError);
   }
 
   getFormats():Observable<IFormat[]> {
     return this._http.get(this._apiUrl + 'format')
       .map((response: Response) => <IFormat> response.json())
-      //.do(data => console.log('All: ' +  JSON.stringify(data)))
       .catch(this.handleError);
   }
 

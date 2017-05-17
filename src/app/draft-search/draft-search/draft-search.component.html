@@ -1,0 +1,9 @@
+<p>
+  Search for MTGO Username:
+  <input #textbox type='text' name='name' (keyup.enter)='onButtonClick(textbox.value)'>
+  <button (click)='onButtonClick(textbox.value)'>Search</button>
+  <app-result-table
+    [username]='nameSearch'
+    [isPaginated]='isPaginated'>
+  </app-result-table>
+</p>

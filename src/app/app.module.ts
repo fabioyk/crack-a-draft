@@ -10,6 +10,7 @@ import { DraftModule } from "app/draft/draft.module";
 
 import { Uploader }      from 'angular2-http-file-upload';
 import { CrackModule } from "app/crack/crack.module";
+import { DraftSearchModule } from "app/draft-search/draft-search.module";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { CrackModule } from "app/crack/crack.module";
     HttpModule,
     DraftModule,
     CrackModule,
+    DraftSearchModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent}
     ])

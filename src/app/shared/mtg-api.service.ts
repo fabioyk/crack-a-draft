@@ -20,7 +20,7 @@ export class MtgApiService {
       formattedName = cardName.replace(' // ', '|');
       isSplitCard = true;
     }
-    return this._http.get('https://api.magicthegathering.io/v1/cards?name='+formattedName)
+    return this._http.get('https://api.magicthegathering.io/v1/cards?name="'+formattedName+'"')
       .map((response: Response) => {
         return this.parseResponse(response.json(), cardName, isSplitCard);
       })
