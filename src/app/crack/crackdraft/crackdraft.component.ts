@@ -3,7 +3,6 @@ import { DbService } from "app/shared/db.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { IDraft } from "app/draft";
-import { MtgApiService } from "app/shared/mtg-api.service";
 import { ICard } from "app/card";
 
 @Component({
@@ -32,8 +31,7 @@ export class CrackdraftComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
-              private _dbService: DbService,
-              private _mtgApiService: MtgApiService) { }
+              private _dbService: DbService) { }
 
   ngOnInit() {
     this.sub = this._route.params.subscribe(
@@ -50,7 +48,7 @@ export class CrackdraftComponent implements OnInit {
   getDraft(draftId:string) {
     if(draftId) {
       this.draftId = draftId;
-      this._dbService.getDraft(draftId)
+      this._dbService.getDraft(draftId, false)
         .subscribe(draft => {
           this.draftData = draft;
           this.startupCrackDraft();
@@ -78,7 +76,7 @@ export class CrackdraftComponent implements OnInit {
       this.currentState = 2;      
     }
 
-    this._mtgApiService.getCardInfo(cardName)
+    this._dbService.getCardInfo(cardName)
       .subscribe(cardData => {
         this.myPickedCards.push(cardData);
         this.updateColorCount(cardData);

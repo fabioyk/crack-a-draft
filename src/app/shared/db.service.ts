@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import { IDraft } from "app/draft";
 import { IFormat } from "app/format";
+import { ICard } from "app/card";
 
 
 
@@ -17,8 +18,26 @@ export class DbService {
 
   constructor(private _http: Http) { }
 
-  getDraft(draftId:string):Observable<IDraft> {
-    return this._http.get(this._apiUrl + 'draft?id=' + draftId)
+  getCardInfo(cardName:string):Observable<ICard> {
+    let queryUrl = this._apiUrl + 'card?name=' + cardName;
+    return this._http.get(queryUrl)
+      .map((response: Response) => <ICard> response.json())
+      .catch(this.handleError);
+  }
+
+  getCardsInfo(cardNameArray:string[]):Observable<ICard[]> {
+    let queryUrl = this._apiUrl + 'card?array=' + JSON.stringify(cardNameArray);
+    return this._http.get(queryUrl)
+      .map((response: Response) => <ICard[]> response.json())
+      .catch(this.handleError);
+  }
+
+  getDraft(draftId:string, isCardDataEmbed:boolean):Observable<IDraft> {
+    let queryUrl = this._apiUrl + 'draft?id=' + draftId;
+    if (isCardDataEmbed) {
+      queryUrl += '&embed=true';
+    }
+    return this._http.get(queryUrl)
       .map((response: Response) => <IDraft> response.json())
       .catch(this.handleError);
   }
@@ -73,9 +92,9 @@ export class DbService {
         }
       })
       .catch(this.handleError);
-      
-    
   }
+
+
 
   private handleError(error: Response) {
     console.error(error);

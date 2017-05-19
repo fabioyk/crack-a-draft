@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './card/card.component';
 import { CardService } from './card.service';
 import { DbService } from './db.service';
-import { MtgApiService } from './mtg-api.service';
 
 @NgModule({
   imports: [
@@ -14,6 +13,6 @@ import { MtgApiService } from './mtg-api.service';
     CardComponent
   ],
   declarations: [ CardComponent ],
-  providers: [CardService, DbService, MtgApiService]
+  providers: [CardService, DbService]
 })
 export class SharedModule { }

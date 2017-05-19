@@ -33,7 +33,7 @@ export class DraftViewerComponent implements OnInit {
 
     if(draftId) {
       this.draftId = draftId;
-      this._dbService.getDraft(draftId)
+      this._dbService.getDraft(draftId, true)
         .subscribe(draft =>  {
           if (draft.error) {
             this.errorMessage = draft.error;

@@ -1,5 +1,6 @@
 import { IFormat } from "app/format";
 import { ICrack } from "app/crack";
+import { ICard } from "app/card";
 
 export interface IDraft {
   draft: {
@@ -12,5 +13,6 @@ export interface IDraft {
     cracks: [ICrack];
   };
   format: IFormat;
+  cards: [ICard]
   error: string;
 }

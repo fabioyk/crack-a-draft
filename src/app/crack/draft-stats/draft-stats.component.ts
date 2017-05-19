@@ -47,7 +47,7 @@ export class DraftStatsComponent implements OnInit {
   getDraft(draftId, crackId) {
     console.log('Loaded draft stats. draft id='+draftId);
 
-    this._dbService.getDraft(draftId)
+    this._dbService.getDraft(draftId, true)
       .subscribe(draft =>  {
         if (draft.error) {
           this.errorMessage = draft.error;
