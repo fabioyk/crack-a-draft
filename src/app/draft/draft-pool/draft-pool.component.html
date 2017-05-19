@@ -1,0 +1,14 @@
+<p>Card Pool</p>
+<div class="pool-buttons">
+  Sort By: 
+  <button [disabled]='sortBy==="name"'
+          (click)='sortCardPoolArray("name")'>Name</button>
+  <button [disabled]='sortBy==="cmc"'
+          (click)='sortCardPoolArray("cmc")'>CMC</button>
+  <button [disabled]='sortBy==="color"'
+          (click)='sortCardPoolArray("color")'>Color</button>
+</div>
+<app-card *ngFor='let card of cardPool'
+  [cardName]='card.name'
+>
+</app-card>

@@ -5,6 +5,7 @@ import { RouterModule} from '@angular/router';
 
 import { DraftViewerComponent } from "app/draft/draft-viewer/draft-viewer.component";
 import { DraftUploadComponent } from './draft-upload/draft-upload.component';
+import { DraftPoolComponent } from './draft-pool/draft-pool.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { DraftUploadComponent } from './draft-upload/draft-upload.component';
   ],
   declarations: [
     DraftViewerComponent,
-    DraftUploadComponent
+    DraftUploadComponent,
+    DraftPoolComponent
   ]
 })
 export class DraftModule { }

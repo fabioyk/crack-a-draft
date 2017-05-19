@@ -3,6 +3,7 @@ import { DbService } from "app/shared/db.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { IDraft } from "app/draft";
+import { ICard } from "app/card";
 
 @Component({
   selector: 'app-draft-viewer',
@@ -13,6 +14,8 @@ export class DraftViewerComponent implements OnInit {
   draftId: string;
   draftData: IDraft;
   errorMessage: string;
+  state: number;
+  cardPool: ICard[];
 
   private sub: Subscription;
   
@@ -26,6 +29,11 @@ export class DraftViewerComponent implements OnInit {
             let id = params['draftId'];
             this.getDraft(id);
     });
+    this.state = 0;
+  }
+
+  onChangeView(newState:number) {
+    this.state = newState;
   }
 
   getDraft(draftId:string) {
