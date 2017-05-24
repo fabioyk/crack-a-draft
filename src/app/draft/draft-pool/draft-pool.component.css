@@ -1,0 +1,19 @@
+.top-pool {
+}
+
+.pool-stacked {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.column {
+
+  width: 180px;
+  text-align: center;
+}
+
+
+.column app-card:last-child div img {
+  margin-bottom: 0;
+}

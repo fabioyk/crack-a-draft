@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -9,6 +9,8 @@ export class CardComponent implements OnInit {
   @Input() cardName: string;
   @Input() picked: boolean;
   @Input() stats: number;
+  @Input() stacked: boolean;
+  @Input() clickable: boolean;
   cardImageUrl: string;
   pickrate:string;
   @Input() index: number;
@@ -27,9 +29,16 @@ export class CardComponent implements OnInit {
     }
   }
 
+  ngOnChanges() {
+    if (this.cardName === 'Orzhov Signet') {
+      console.log(this.stacked);
+    }
+  }
+
   onClick():void {
     //console.log('clicked',this.index);
-    this.cardClicked.emit(this.index.toString());
+    if (this.index)
+      this.cardClicked.emit(this.index.toString());
   }
 
 }

@@ -8,7 +8,7 @@ import { DbService } from "app/shared/db.service";
   styleUrls: ['./result-table.component.css']
 })
 export class ResultTableComponent implements OnInit {
-  private draftData: IDraft[];
+  draftData: IDraft[];
 
   pageSize: number;
   pageNumber: number;

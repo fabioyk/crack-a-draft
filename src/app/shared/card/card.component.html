@@ -1,6 +1,7 @@
 <span class='card-container'>
+  <!--<div class='card-container'>-->
 <img class='card-img' 
-     [ngClass]="{pick: picked}"
+     [ngClass]="{pick: picked, stack: stacked, clickable: clickable}"
      src={{cardImageUrl}} 
      *ngIf='cardImageUrl'
      (click)='onClick()'
@@ -8,4 +9,5 @@
      title={{cardName}}
 >
 <h2 *ngIf='pickrate'>{{pickrate}}%</h2>
+<!--</div>-->
 </span>

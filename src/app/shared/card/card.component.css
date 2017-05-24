@@ -1,12 +1,24 @@
 .card-container {
-  position: relative;
+  position: relative;  
   width: 100%;
+}
+.card-container:last-child {
+  height: 100%;
 }
 
 .card-img {
-  max-width: 170px;
-  margin: 7px;
+  height: 255px;
+  width: 180px;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.stack {
+  margin-bottom: -226px;
+}
+
 .pick {
   border: 5px solid red;
 }

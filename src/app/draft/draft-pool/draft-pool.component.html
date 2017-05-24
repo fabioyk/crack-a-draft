@@ -1,4 +1,4 @@
-<p>Card Pool</p>
+<p>Card Pool ({{cardPoolTop.length}} cards)</p>
 <div class="pool-buttons">
   Sort By: 
   <button [disabled]='sortBy==="name"'
@@ -7,8 +7,55 @@
           (click)='sortCardPoolArray("cmc")'>CMC</button>
   <button [disabled]='sortBy==="color"'
           (click)='sortCardPoolArray("color")'>Color</button>
+  <button [disabled]='sortBy==="type"'
+          (click)='sortCardPoolArray("type")'>Type</button>
+  <input type="checkbox" 
+        [checked]="isColumnView" 
+        (change)="isColumnView = $event.target.checked">
 </div>
-<app-card *ngFor='let card of cardPool'
-  [cardName]='card.name'
->
-</app-card>
+<div class="top-pool pool">
+  <div class="pool-normal" *ngIf='!isColumnView'>
+    <app-card *ngFor='let card of cardPoolTop'
+      [cardName]='card.name'
+      (click)='onCardClicked(card.name, true)'
+      [clickable]='true'
+    >
+    </app-card>
+  </div>
+  <div class="pool-stacked" *ngIf='isColumnView'>  
+    <div class="column" *ngFor='let cardColumn of cardPoolColumnsTop; let i = index'>
+      <span *ngIf='sortBy !== "name"'>{{cardPoolColumnNamesTop[i]}} ({{cardColumn.length}})</span>
+      <app-card *ngFor='let card of cardColumn; let cardIndex = index'
+        [cardName]='card.name'
+        [stacked]='cardIndex !== cardColumn.length-1'
+        (click)='onCardClicked(card.name, true)'
+        [clickable]='true'
+      >
+      </app-card>
+    </div>
+  </div>
+</div>
+<div class="bottom-pool pool" *ngIf='cardPoolBottom.length > 0'>
+  <hr>
+  Sideboard ({{cardPoolBottom.length}} cards)
+  <div class="pool-normal" *ngIf='!isColumnView'>
+    <app-card *ngFor='let card of cardPoolBottom'
+      [cardName]='card.name'
+      (click)='onCardClicked(card.name, false)'
+      [clickable]='true'
+    >
+    </app-card>
+  </div>
+  <div class="pool-stacked" *ngIf='isColumnView'>  
+    <div class="column" *ngFor='let cardColumn of cardPoolColumnsBottom; let i = index'>
+      <span *ngIf='sortBy !== "name"'>{{cardPoolColumnNamesBottom[i]}} ({{cardColumn.length}})</span>
+      <app-card *ngFor='let card of cardColumn; let cardIndex = index'
+        [cardName]='card.name'
+        [stacked]='cardIndex !== cardColumn.length-1'
+        (click)='onCardClicked(card.name, false)'
+        [clickable]='true'
+      >
+      </app-card>
+    </div>
+  </div>
+</div>
