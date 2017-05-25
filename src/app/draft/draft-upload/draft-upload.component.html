@@ -4,6 +4,13 @@
       type="file" (change)="submit($event)" 
       placeholder="Upload file" 
       accept=".txt">
+      <label>
+      <input type="checkbox" 
+        [checked]="isAnonymous" 
+        (change)="isAnonymous = $event.target.checked">
+        Anonymous Upload
+      </label>
+    
   </div>
   <div class="files-uploaded" *ngIf='draftIds'>
     Drafts uploaded:

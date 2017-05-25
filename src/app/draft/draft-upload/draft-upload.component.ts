@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class DraftUploadComponent implements OnInit {
   draftIds: string[];
   filename: string; 
+  isAnonymous: boolean;
 
   constructor(public uploaderService: Uploader,
               private _router: Router) { }
@@ -23,7 +24,7 @@ export class DraftUploadComponent implements OnInit {
   submit() {
         let uploadFile = (<HTMLInputElement>window.document.getElementById('draftUploadField')).files[0];
  
-        let myUploadItem = new DraftUploadItem(uploadFile);
+        let myUploadItem = new DraftUploadItem(uploadFile, this.isAnonymous);
         //myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
         this.uploaderService.onCompleteUpload = (item, response, status, headers) => {
           console.log('Uploaded');
