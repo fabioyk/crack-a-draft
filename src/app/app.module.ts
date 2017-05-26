@@ -12,6 +12,8 @@ import { Uploader }      from 'angular2-http-file-upload';
 import { CrackModule } from "app/crack/crack.module";
 import { DraftSearchModule } from "app/draft-search/draft-search.module";
 
+import { AlertModule, BsDropdownModule, ModalModule } from 'ngx-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,10 @@ import { DraftSearchModule } from "app/draft-search/draft-search.module";
     DraftSearchModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent}
-    ])
+    ]),
+    AlertModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [ Uploader ],
   bootstrap: [AppComponent]

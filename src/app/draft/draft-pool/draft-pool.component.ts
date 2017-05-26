@@ -105,6 +105,9 @@ export class DraftPoolComponent implements OnInit {
     }
     switch(attribute) {
       case 'cmc':
+        if (!similarCards[0].cmc) {
+          return '0';
+        }
         return similarCards[0].cmc.toString();
       case 'rarity':
         return similarCards[0].rarity;

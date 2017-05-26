@@ -1,7 +1,12 @@
-<h1>
-  <a [routerLink]="['/draft']">Upload a Draft</a>
-  <a [routerLink]="['/draft', '59169942c5eba0725e3178f8']">Example Draft</a>
-  <a [routerLink]="['/crack']">Crack a Draft</a>
-  <a [routerLink]="['/search']">Search</a>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <a class='navbar-brand' [routerLink]="['']"><i class="fa fa-cubes" aria-hidden="true"></i> Crack a Draft</a>
+      <ul class="nav navbar-nav navbar-right">        
+        <li><a [routerLink]="['/draft']">Upload a Draft</a></li>
+        <li><a [routerLink]="['/crack']">Crack a Draft</a></li>
+        <li><a [routerLink]="['/search']">List/Search</a></li>
+      </ul>
+    </div>
+  </nav>
   <router-outlet></router-outlet>
-</h1>
+    

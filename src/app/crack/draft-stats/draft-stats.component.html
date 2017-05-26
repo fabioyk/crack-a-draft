@@ -1,37 +1,64 @@
-<div class="draft-stats">
+<div class="container">
   <div class="loading" *ngIf='!draftData'>
     <span *ngIf='!errorMessage'>Loading draft~</span>
-    <span *ngIf='errorMessage'>Draft not found</span>    
+    <alert type="danger" *ngIf='errorMessage'>
+      Draft not found
+    </alert>
+  </div>
+  <div *ngIf='draftData'>
+    <h2>{{draftData.draft.drafter}}'s {{draftData.format.name}} Draft</h2>
+    <p><a [routerLink]="['/crack', draftData.draft._id]">
+      <i class="fa fa-cubes" aria-hidden="true"></i> Crack this draft</a> | 
+      <a [routerLink]="['/draft', draftData.draft._id]">
+      <i class="fa fa-list-alt" aria-hidden="true"></i> View draft</a></p>
   </div>
   <div *ngIf='draftData && !crackCount'>
     There are no crack a drafts registered to this draft.
   </div>
-  <div *ngIf='crackData'>
-    <p>Your 8 picks:</p>
-    <app-card *ngFor='let pick of crackData.picks; let i = index'
-        [cardName]='draftData.draft.packs[i][pick]'>
-    </app-card>
-  </div>
-  <div *ngIf='draftData'>
-    <p>
-      {{draftData.draft.drafter}}'s First 8 picks: <a [routerLink]="['/draft', draftData.draft._id]">Full draft</a>
-    </p>
-    <app-card *ngFor='let pick of (draftData.draft.picks.slice(0,8)); let i = index'
-        [cardName]='draftData.draft.packs[i][pick]'>
-    </app-card>
-
-    <div class="draft">
-      Pick rate:
-
-      <div class="pack" *ngFor='let pack of (draftData.draft.packs.slice(0,8)); let packIndex = index'>
-        <p>{{calculatePackPickString(packIndex)}}</p>
-        <app-card *ngFor='let card of pack; let pickIndex = index'
-          [cardName]='card'
-          [stats]='pickCounts[packIndex][pickIndex]'
-        >
+</div>
+<div class="container-fluid">
+  <tabset #staticTabs *ngIf='draftData'>
+    <tab [heading]='draftData.draft.drafter + " First 8 Picks"'>
+      <div *ngIf='crackData'>
+        <h3>Your 8 picks:</h3>
+        <app-card *ngFor='let pick of crackData.picks; let i = index'
+            [cardName]='draftData.draft.packs[i][pick]'>
         </app-card>
       </div>
+      <div *ngIf='draftData'>
+        <h3>
+          {{draftData.draft.drafter}}'s First 8 picks:
+        </h3>
+        <app-card *ngFor='let pick of (draftData.draft.picks.slice(0,8)); let i = index'
+            [cardName]='draftData.draft.packs[i][pick]'>
+        </app-card>
 
+        <div class="draft">
+          <h3>Pick rate, by {{draftData.draft.cracks.length+1}} people:</h3>
+
+          <div class="pack" *ngFor='let pack of (draftData.draft.packs.slice(0,8)); let packIndex = index'>
+            <h4>{{calculatePackPickString(packIndex)}}</h4>
+            <app-card *ngFor='let card of pack; let pickIndex = index'
+              [cardName]='card'
+              [stats]='pickCounts[packIndex][pickIndex]'
+            >
+            </app-card>
+         </div>
+        </div>
+      </div>
+    </tab>
+    <tab heading='Statistics'>
+
+    </tab>
+    <tab heading='List of All First 8 Picks'>
+
+    </tab>
+  </tabset>
+</div>
+  
+  
+  
+<!--
       <div class="stats-block">
         <p>{{archetypeCounts}}</p>
         <p *ngFor='let color of colorCounts; let i = index'>{{i+1}}: {{color}}</p>
@@ -39,6 +66,4 @@
     </div>
 
     
-  </div>
-
-</div>
+  </div>-->

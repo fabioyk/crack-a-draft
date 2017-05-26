@@ -1,3 +1,61 @@
-<p>
-  home works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-cubes" aria-hidden="true"></i> Crack a Draft
+        </div>
+        <div class="panel-body">
+          <p>The draft is choosed randomly from the format you pick below. Or simply go for All Random if you can't choose!</p>
+          <app-format-chooser></app-format-chooser>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-upload" aria-hidden="true"></i> Upload a Draft
+        </div>
+        <div class="panel-body">
+          <app-draft-upload></app-draft-upload>
+          <a (click)='lgModal.show()'>What do I need to upload?</a>
+
+          <div bsModal #lgModal='bs-modal' class='modal fade'
+                tabindex='-1' role='dialog' aria-labelledby='myLargeModalLabel'
+                aria-hidden='true'>
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title pull-left">How to upload a draft log</h4>
+                  <button type='button' class='close pull-right' (click)='lgModal.hide()' aria-label="Close"> 
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h4>Where are my draft log files?</h4>
+                  <p>You need to opt-in to save your draft logs. By default, they are located at 
+                    <mark>C:\Users\Your Windows Username\Documents</mark>. 
+                    They are .txt files with your name, date and draft format.</p>
+                  <h4>Making MTGO save draft logs</h4>
+                  <p>To turn this option on, go to your Account menu</p>
+                  <img src="assets/draftlog-tutorial/img01.png" 
+                        class="img-thumbnail img-responsive" alt="Account menu Image">
+                  <p>Then navigate to Game History on the left sidebar and mark the checkbox below. You can also change the destination folder here.</p>
+                  <img src="assets/draftlog-tutorial/img02.png" 
+                        class="img-thumbnail img-responsive" alt="Game History Image">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <app-draft-search></app-draft-search>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>

@@ -5,6 +5,8 @@ import { FormatChooserComponent } from './format-chooser/format-chooser.componen
 import { SharedModule } from "app/shared/shared.module";
 import { RouterModule } from "@angular/router";
 import { DraftStatsComponent } from "./draft-stats/draft-stats.component";
+import { AlertModule, TabsModule } from "ngx-bootstrap";
+
 
 @NgModule({
   imports: [
@@ -16,12 +18,17 @@ import { DraftStatsComponent } from "./draft-stats/draft-stats.component";
       { path: 'stats/:draftId/:crackId', component: DraftStatsComponent },
       { path: 'stats/:draftId', component: DraftStatsComponent }
       
-    ])
+    ]),
+    AlertModule.forRoot(),
+    TabsModule.forRoot()
   ],
   declarations: [
     CrackdraftComponent, 
     FormatChooserComponent,
     DraftStatsComponent
+  ],
+  exports: [
+    FormatChooserComponent
   ]
 })
 export class CrackModule { }

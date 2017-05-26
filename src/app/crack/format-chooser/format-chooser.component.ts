@@ -39,8 +39,8 @@ export class FormatChooserComponent implements OnInit {
     error => this.errorMessage = <any>error);
   }
   
-  onSubmit():void {
-    this._dbService.getDraftByFormat(this.chosenFormat)
+  onSubmit(format:string):void {
+    this._dbService.getDraftByFormat(format)
       .subscribe(draft =>  {
         if (draft.error) {
           this.errorMessage = draft.error;
@@ -49,9 +49,6 @@ export class FormatChooserComponent implements OnInit {
         }          
       },
     error => this.errorMessage = <any>error);
-
-
-    console.log('boom',this.chosenFormat);
   }
 
   onChange(selectedFormat):void {

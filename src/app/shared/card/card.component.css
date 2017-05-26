@@ -7,8 +7,9 @@
 }
 
 .card-img {
-  height: 255px;
-  width: 180px;
+  height: 234px;
+  width: 165px;
+  padding: 2px;
 }
 
 .clickable {
@@ -16,11 +17,13 @@
 }
 
 .stack {
-  margin-bottom: -226px;
+  margin-bottom: -207px;
 }
 
 .pick {
+  border-radius: 12px;
   border: 5px solid red;
+  background-color: red;
 }
 
 h2 { 

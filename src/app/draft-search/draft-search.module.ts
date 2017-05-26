@@ -13,6 +13,9 @@ import { ResultTableComponent } from './result-table/result-table.component';
       { path: 'search', component: DraftSearchComponent }
     ])
   ],
-  declarations: [DraftSearchComponent, ResultTableComponent]
+  declarations: [DraftSearchComponent, ResultTableComponent],
+  exports: [
+    DraftSearchComponent
+  ]
 })
 export class DraftSearchModule { }
