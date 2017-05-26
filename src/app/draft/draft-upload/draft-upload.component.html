@@ -1,7 +1,7 @@
 <div class="file-upload">
   <div class="upload-form" *ngIf='!draftIds'>
     <input name='draftUploadField' id='draftUploadField'
-      type="file" (change)="submit($event)" 
+      type="file"
       placeholder="Upload file" 
       accept=".txt">
       <label>
@@ -10,13 +10,13 @@
         (change)="isAnonymous = $event.target.checked">
         Anonymous Upload
       </label>
-    
+    <button (click)="submit($event)">Upload</button>
   </div>
   <div class="files-uploaded" *ngIf='draftIds'>
     Drafts uploaded:
     <ul *ngIf='draftIds.length > 1'>
       <li *ngFor='let draftId of draftIds; let i = index'>
-        <a [routerLink]="['/draft', draftId]" target="_blank">Draft {{i}}</a>
+        <a [routerLink]="['/draft', draftId]" target="_blank">Draft {{i+1}}</a>
       </li>
     </ul>
   </div>

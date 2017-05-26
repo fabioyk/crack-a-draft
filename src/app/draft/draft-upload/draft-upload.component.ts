@@ -28,9 +28,8 @@ export class DraftUploadComponent implements OnInit {
         //myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
         this.uploaderService.onCompleteUpload = (item, response, status, headers) => {
           console.log('Uploaded');
-          if (response && !response.error) {
+          if (response && !JSON.parse(response).error) {
             var responseJson = JSON.parse(response);
-
             if (responseJson.ids.length === 1) {
               this._router.navigate(['/draft', responseJson.ids[0]]);
             } else {
