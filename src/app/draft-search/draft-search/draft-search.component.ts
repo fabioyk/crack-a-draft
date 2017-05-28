@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IDraft } from "app/draft";
+import { DbService } from "app/shared/db.service";
 
 @Component({
   selector: 'app-draft-search',
@@ -6,19 +8,75 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./draft-search.component.css']
 })
 export class DraftSearchComponent implements OnInit {
-  nameSearch: string;
+  username: string;
   isPaginated: boolean;
+  draftData: IDraft[];
 
-  constructor() { }
+  public pageSize: number;
+  public pageNumber: number;
+  public totalDraftCount: number;
+  public totalPages: number;
+
+  private errorMessage: string;
+
+  constructor(private _dbService: DbService) { }
 
   ngOnInit() {
+    this.pageSize = 20;
+    this.pageNumber = 0;
+    if (!this.username) this.username = null;
+    if (!this.isPaginated) this.isPaginated = false;
+
+    this.hardRefreshTable();
   }
 
   onButtonClick(name: string) {
-    console.log(name);
-    this.nameSearch = name;
-    this.isPaginated = this.nameSearch !== '';
+    this.username = name;
+    this.isPaginated = this.username !== '';
+    this.hardRefreshTable();
+  }
 
+  hardRefreshTable() {
+    this.pageNumber = 0;
+    this.refreshTable();
+  }
+
+  refreshTable() {
+    //this.draftData = null;
+    console.log(this.username,this.pageNumber);
+    this._dbService.getDraftsCount(this.username)
+      .subscribe(count => {
+        if (count.error) {
+          this.errorMessage = count.error;
+        } else {
+          this.totalDraftCount = count.count;
+          this.totalPages = Math.ceil(this.totalDraftCount / this.pageSize) - 1;
+        }
+      },
+      error => this.errorMessage = <any> error);
+    this._dbService.getDrafts(this.username, this.pageSize, this.pageNumber)
+        .subscribe(drafts =>  {
+          if (drafts[0].error) {
+            this.errorMessage = drafts[0].error;
+            this.draftData = [];
+          } else {
+            this.draftData = drafts;
+          }
+        },
+      error => this.errorMessage = <any>error);
+  }
+
+  onClickName(name:string) {
+    this.username = name;
+    this.isPaginated = true;
+    this.hardRefreshTable();
+  }
+
+  pageChanged(event:any) {
+    this.pageNumber = event.page-1;    
+    this.refreshTable();
+    
+  //  this.pageNumber += direction;
     
   }
 
