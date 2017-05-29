@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+.panel-group .panel {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

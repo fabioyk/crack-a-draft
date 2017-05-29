@@ -88,7 +88,7 @@ export class DraftPoolComponent implements OnInit {
     sortedCardPool.forEach((eachCard, index) => {
       if (index > 0) {
         let diff:number = mainSorter(sortedCardPool[index-1], sortedCardPool[index]);
-        if ((diff !== 0 && attribute !== 'name') || (attribute === 'name' && index % 9 === 0)) {
+        if (diff !== 0) {
           cardPoolColumnNamesArray.push(this.getColumnName(cardPoolColumnsArray[currentColumn], attribute));
           cardPoolColumnsArray.push([]);
           currentColumn++;

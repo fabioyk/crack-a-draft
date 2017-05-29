@@ -18,45 +18,82 @@
 </div>
 <div class="container-fluid">
   <tabset #staticTabs *ngIf='draftData'>
-    <tab [heading]='draftData.draft.drafter + " First 8 Picks"'>
-      <div *ngIf='crackData'>
-        <h3>Your 8 picks:</h3>
-        <app-card *ngFor='let pick of crackData.picks; let i = index'
-            [cardName]='draftData.draft.packs[i][pick]'>
-        </app-card>
-      </div>
-      <div *ngIf='draftData'>
-        <h3>
-          {{draftData.draft.drafter}}'s First 8 picks:
-        </h3>
-        <app-card *ngFor='let pick of (draftData.draft.picks.slice(0,8)); let i = index'
-            [cardName]='draftData.draft.packs[i][pick]'>
-        </app-card>
+    <tab heading='Pick Rate'>
+      <div class="container-fluid">
+        <div *ngIf='crackData'>
+          <h3>Your 8 picks:</h3>
+          <app-card *ngFor='let pick of crackData.picks; let i = index'
+              [cardName]='draftData.draft.packs[i][pick]'>
+          </app-card>
+        </div>
+        <div *ngIf='draftData'>
+          <h3>
+            {{draftData.draft.drafter}}'s First 8 picks:
+          </h3>
+          <app-card *ngFor='let pick of (draftData.draft.picks.slice(0,8)); let i = index'
+              [cardName]='draftData.draft.packs[i][pick]'>
+          </app-card>
 
-        <div class="draft">
-          <h3>Pick rate, by {{draftData.draft.cracks.length+1}} people:</h3>
+          <div class="draft">
+            <h3>Pick rate, by {{draftData.draft.cracks.length+1}} people:</h3>
 
-          <div class="pack" *ngFor='let pack of (draftData.draft.packs.slice(0,8)); let packIndex = index'>
-            <h4>{{calculatePackPickString(packIndex)}}</h4>
-            <app-card *ngFor='let card of pack; let pickIndex = index'
-              [cardName]='card'
-              [stats]='pickCounts[packIndex][pickIndex]'
-            >
-            </app-card>
-         </div>
+            <div class="pack" *ngFor='let pack of (draftData.draft.packs.slice(0,8)); let packIndex = index'>
+              <h4>{{calculatePackPickString(packIndex)}}</h4>
+              <app-card *ngFor='let card of pack; let pickIndex = index'
+                [cardName]='card'
+                [stats]='pickCounts[packIndex][pickIndex]'
+              >
+              </app-card>
+          </div>
+          </div>
+        </div>
+      </div>      
+    </tab>
+    <tab heading='Statistics'>
+      <div class="container-fluid panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Archetypes
+          </div>
+          <div class="panel-body">
+            
+          </div>
         </div>
       </div>
     </tab>
-    <tab heading='Statistics'>
-
-    </tab>
     <tab heading='List of All First 8 Picks'>
-
+      <div class="container-fluid">
+        <accordion>
+        <accordion-group (click)='onClickAccordion(0)' [isOpen]='true'>
+          <div accordion-heading >
+            {{draftData.draft.drafter}}'s Picks 
+            <i class='pull-right float-xs-right glyphicon'
+         [ngClass]="{'glyphicon-chevron-down': crackAccordions[0], 'glyphicon-chevron-right': !crackAccordions[0]}"></i>
+          </div>
+          <app-card *ngFor='let pick of (draftData.draft.picks.slice(0,8)); let i = index'
+            [cardName]='draftData.draft.packs[i][pick]'>
+          </app-card>
+        </accordion-group>
+        <accordion-group *ngFor='let crack of draftData.draft.cracks; let crackIndex = index'
+                         (click)='onClickAccordion(crackIndex+1)' [isOpen]='false'>
+          <div accordion-heading>
+            #{{crackIndex+1}}, Archetype: {{crack.archetype}}
+            <i class='pull-right float-xs-right glyphicon'
+         [ngClass]="{'glyphicon-chevron-down': crackAccordions[crackIndex+1], 'glyphicon-chevron-right': !crackAccordions[crackIndex+1]}"></i>
+          </div>
+          <app-card *ngFor='let pickNumber of crack.picks; let packIndex = index'
+              [cardName]='draftData.draft.packs[packIndex][pickNumber]'
+            >
+          </app-card>
+        </accordion-group>
+      </accordion>
+      </div>
+      
     </tab>
   </tabset>
 </div>
   
-  
+  <canvas #archetypesChart width="400" height="400"></canvas>
   
 <!--
       <div class="stats-block">

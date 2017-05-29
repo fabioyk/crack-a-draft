@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { DbService } from "app/shared/db.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { IDraft } from "app/draft";
 import { ICrack } from "app/crack";
-
+import Chart from 'chart.js';
 
 @Component({
   selector: 'app-draft-stats',
@@ -12,10 +12,13 @@ import { ICrack } from "app/crack";
   styleUrls: ['./draft-stats.component.css']
 })
 export class DraftStatsComponent implements OnInit {
+  @ViewChild('archetypesChart') archetypesChart: ElementRef;
+
   draftId: string;
   crackId: string;
   draftData: IDraft;
   crackData: ICrack;
+  crackAccordions: boolean[];
   errorMessage: string;
   private sub: Subscription;
 
@@ -47,6 +50,7 @@ export class DraftStatsComponent implements OnInit {
   getDraft(draftId, crackId) {
     console.log('Loaded draft stats. draft id='+draftId);
 
+    this.crackAccordions = [true];
     this._dbService.getDraft(draftId, true)
       .subscribe(draft =>  {
         if (draft.error) {
@@ -54,11 +58,11 @@ export class DraftStatsComponent implements OnInit {
         } else {
           this.draftData = draft;
           if (crackId) {
-            draft.draft.cracks.forEach((eachCrack) => {
+            draft.draft.cracks.forEach((eachCrack, i) => {
               if (eachCrack.id === crackId) {
                 this.crackData = eachCrack;
                 return;
-              }
+              }              
             });
           }
           this.calculateStats(draft);
@@ -91,6 +95,7 @@ export class DraftStatsComponent implements OnInit {
     });
 
     draftData.draft.cracks.forEach((crack) => {
+      this.crackAccordions.push(false);
       crack.picks.forEach((pick, index) => {
         this.pickCounts[index][pick]++;
       });
@@ -121,6 +126,15 @@ export class DraftStatsComponent implements OnInit {
 
     console.log(this.colorCounts);
 
+
+    // Setting charts up
+    var archetypesCtx = this.archetypesChart.nativeElement.getContext('2d');
+    var chart = new Chart(archetypesCtx, {
+      labels: this.colorCounts.map((obj)=>obj[0]),
+      datasets: [{
+        data: this.colorCounts.map((obj)=>obj[1])
+      }]
+    });
   }
 
   calculatePackPickString(pickNumber:number):string {    
@@ -128,5 +142,9 @@ export class DraftStatsComponent implements OnInit {
     var pick = pickNumber % 15 + 1;
 
     return 'Pack ' + pack + ' Pick ' + pick;
+  }
+
+  onClickAccordion(index:number) {
+    this.crackAccordions[index] = !this.crackAccordions[index];
   }
 }

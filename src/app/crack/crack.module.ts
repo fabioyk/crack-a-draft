@@ -5,13 +5,15 @@ import { FormatChooserComponent } from './format-chooser/format-chooser.componen
 import { SharedModule } from "app/shared/shared.module";
 import { RouterModule } from "@angular/router";
 import { DraftStatsComponent } from "./draft-stats/draft-stats.component";
-import { AlertModule, TabsModule } from "ngx-bootstrap";
+import { AlertModule, TabsModule, AccordionModule, ButtonsModule } from "ngx-bootstrap";
+import { FormsModule } from "@angular/forms";
 
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     RouterModule.forChild([
       { path: 'crack', component: FormatChooserComponent },
       { path: 'crack/:draftId', component: CrackdraftComponent },
@@ -20,7 +22,9 @@ import { AlertModule, TabsModule } from "ngx-bootstrap";
       
     ]),
     AlertModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    AccordionModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
   declarations: [
     CrackdraftComponent, 

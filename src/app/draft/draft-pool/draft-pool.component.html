@@ -1,18 +1,28 @@
-<p>Card Pool ({{cardPoolTop.length}} cards)</p>
+<h3>Main Deck ({{cardPoolTop.length}} card{{cardPoolTop.length !== 1 ? 's' : ''}})</h3>
 <div class="pool-buttons">
-  Sort By: 
-  <button [disabled]='sortBy==="name"'
-          (click)='sortCardPoolArray("name")'>Name</button>
-  <button [disabled]='sortBy==="cmc"'
-          (click)='sortCardPoolArray("cmc")'>CMC</button>
-  <button [disabled]='sortBy==="color"'
-          (click)='sortCardPoolArray("color")'>Color</button>
-  <button [disabled]='sortBy==="type"'
-          (click)='sortCardPoolArray("type")'>Type</button>
-  <input type="checkbox" 
-        [checked]="isColumnView" 
-        (change)="isColumnView = $event.target.checked">
+  <form class="form-inline">
+    <div class="form-group">
+      <label for="sorting-buttons">Sort By:</label>
+      <div id="sorting-buttons" class="btn-group">
+        <label class='btn btn-default' name='btn-name' [(ngModel)]='sortBy'
+              btnRadio='name' (click)='sortCardPoolArray("name")'>Name</label>
+        <label class='btn btn-default' name='btn-cmc' [(ngModel)]='sortBy'
+              btnRadio='cmc' (click)='sortCardPoolArray("cmc")'>CMC</label>
+        <label class='btn btn-default' name='btn-color' [(ngModel)]='sortBy'
+              btnRadio='color' (click)='sortCardPoolArray("color")'>Color</label>
+        <label class='btn btn-default' name='btn-type' [(ngModel)]='sortBy'
+              btnRadio='type' (click)='sortCardPoolArray("type")'>Type</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="btn-group">
+        <label class='btn btn-primary' name='btn-pile-view' 
+               [(ngModel)]='isColumnView' btnCheckbox>Pile View</label>
+      </div>
+    </div>
+  </form>
 </div>
+<hr>
 <div class="top-pool pool">
   <div class="pool-normal" *ngIf='!isColumnView'>
     <app-card *ngFor='let card of cardPoolTop'
@@ -37,7 +47,7 @@
 </div>
 <div class="bottom-pool pool" *ngIf='cardPoolBottom.length > 0'>
   <hr>
-  Sideboard ({{cardPoolBottom.length}} cards)
+  <h3>Sideboard ({{cardPoolBottom.length}} card{{cardPoolBottom.length !== 1 ? 's' : ''}})</h3>
   <div class="pool-normal" *ngIf='!isColumnView'>
     <app-card *ngFor='let card of cardPoolBottom'
       [cardName]='card.name'

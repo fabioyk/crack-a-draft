@@ -22,9 +22,10 @@ export class CrackdraftComponent implements OnInit {
   currentPick: number;
   archetype: String;
   colorCount: object;
-  colorCheckboxes: boolean[];
+  public colorCheckboxes: boolean[];
 
   colorNames = ['White', 'Blue', 'Black', 'Red', 'Green'];
+  classNames = ['btn-default', 'btn-info', 'btn-black', 'btn-danger', 'btn-success'];
   colors = ['W', 'U', 'B', 'R', 'G'];
 
   currentState: number;
@@ -42,7 +43,7 @@ export class CrackdraftComponent implements OnInit {
     
     this.currentState = 0;
 
-    this.colorCheckboxes = [];
+    this.colorCheckboxes = [false, false, false, false, false];
   }
 
   getDraft(draftId:string) {
@@ -90,7 +91,8 @@ export class CrackdraftComponent implements OnInit {
   }
 
   updateColorCount(newCard:ICard):void {
-    newCard.colorIdentity.forEach((color) => this.colorCount[color]++);
+    if (newCard.colors)
+      newCard.colors.forEach((color) => this.colorCount[color]++);
   }
 
   setColorCheckboxesDefault():void {

@@ -1,0 +1,25 @@
+.btn-group .btn.active {
+  color: white;
+  box-shadow: inset 0 5px 8px rgba(0,0,0,.5);
+}
+
+.btn-group .White.active {
+  color: #111;
+  background-color: LIGHTYELLOW;
+}
+
+.btn-group .Blue.active {
+  background-color: STEELBLUE;
+}
+
+.btn-group .Black.active {
+  background-color: DIMGRAY;
+}
+
+.btn-group .Red.active {
+  background-color: FIREBRICK;
+}
+
+.btn-group .Green.active {
+  background-color: FORESTGREEN;
+}
