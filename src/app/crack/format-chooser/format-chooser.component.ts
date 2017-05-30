@@ -12,7 +12,7 @@ import { IFormat } from "app/format";
 })
 export class FormatChooserComponent implements OnInit {
   formatList:IFormat[];
-  private errorMessage: string;
+  errorMessage: string;
   chosenFormat: string;
 
   constructor(private _route: ActivatedRoute,
