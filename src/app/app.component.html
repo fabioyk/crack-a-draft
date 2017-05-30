@@ -1,12 +1,14 @@
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <a class='navbar-brand' [routerLink]="['']"><i class="fa fa-cubes" aria-hidden="true"></i> Crack a Draft</a>
-      <ul class="nav navbar-nav navbar-right">        
-        <li><a [routerLink]="['/draft']">Upload a Draft</a></li>
-        <li><a [routerLink]="['/crack']">Crack a Draft</a></li>
-        <li><a [routerLink]="['/search']">List/Search</a></li>
-      </ul>
-    </div>
-  </nav>
-  <router-outlet></router-outlet>
-    
+<nav class="navbar navbar-default">
+  <div class="container">
+    <a class='navbar-brand' [routerLink]="['']"><i class="fa fa-cubes" aria-hidden="true"></i> Crack a Draft</a>
+    <ul class="nav navbar-nav navbar-right">        
+      <li><a [routerLink]="['/draft']">Upload a Draft</a></li>
+      <li><a [routerLink]="['/crack']">Crack a Draft</a></li>
+      <li><a [routerLink]="['/search']">List/Search</a></li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+<footer>
+  This website is not produced, endorsed, supported, or affiliated with Wizards of the Coast.
+</footer>
