@@ -51,20 +51,54 @@
     </tab>
     <tab heading='Statistics'>
       <div class="container-fluid panel-group">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            Archetypes
-          </div>
-          <div class="panel-body">
-            
+        <div class="col-md-6">
+          <div class="panel stat-panel panel-default">
+            <div class="panel-heading">
+              Most Common Archetypes
+            </div>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class='table'>
+                  <tr>
+                    <th>Archetype</th>
+                    <th>#</th>
+                  </tr>
+                  <tr *ngFor='let arch of topArchetypes'>
+                    <td>{{arch.name}}</td>
+                    <td>{{arch.count}}</td>
+                  </tr>
+                </table>
+              </div>              
+            </div>
           </div>
         </div>
+        <div class="col-md-6">
+          <div class="panel stat-panel panel-default">
+            <div class="panel-heading">
+              Colors Used
+            </div>
+            <div class="panel-body chart-panel">
+              <ngx-charts-pie-chart
+                [view]='pieChartSize'
+                [results]='colorChartData'
+                [scheme]='colorChartScheme'
+                *ngIf='colorChartData'
+              ></ngx-charts-pie-chart>
+            </div>
+          </div>
+        </div>        
       </div>
     </tab>
-    <tab heading='List of All First 8 Picks'>
+    <tab heading='All First 8 Picks'>
       <div class="container-fluid">
+        <span>Here you can view each crack a draft made for this draft.</span>
+        <div class='pull-right'>
+          <button class='btn btn-primary' (click)='setAllAccordions(true)'>Open All</button>
+          <button class='btn btn-primary' (click)='setAllAccordions(false)'>Close All</button>
+        </div>
+        <hr>
         <accordion>
-        <accordion-group (click)='onClickAccordion(0)' [isOpen]='true'>
+        <accordion-group (click)='onClickAccordion(0)' [isOpen]='crackAccordions[0]'>
           <div accordion-heading >
             {{draftData.draft.drafter}}'s Picks 
             <i class='pull-right float-xs-right glyphicon'
@@ -75,7 +109,8 @@
           </app-card>
         </accordion-group>
         <accordion-group *ngFor='let crack of draftData.draft.cracks; let crackIndex = index'
-                         (click)='onClickAccordion(crackIndex+1)' [isOpen]='false'>
+                          class='accordion-group'
+                         (click)='onClickAccordion(crackIndex+1)' [isOpen]='crackAccordions[crackIndex+1]'>
           <div accordion-heading>
             #{{crackIndex+1}}, Archetype: {{crack.archetype}}
             <i class='pull-right float-xs-right glyphicon'
@@ -92,15 +127,3 @@
     </tab>
   </tabset>
 </div>
-  
-  <canvas #archetypesChart width="400" height="400"></canvas>
-  
-<!--
-      <div class="stats-block">
-        <p>{{archetypeCounts}}</p>
-        <p *ngFor='let color of colorCounts; let i = index'>{{i+1}}: {{color}}</p>
-      </div>
-    </div>
-
-    
-  </div>-->

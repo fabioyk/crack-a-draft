@@ -6,6 +6,9 @@ import { SharedModule } from "app/shared/shared.module";
 import { RouterModule } from "@angular/router";
 import { DraftStatsComponent } from "./draft-stats/draft-stats.component";
 import { AlertModule, TabsModule, AccordionModule, ButtonsModule } from "ngx-bootstrap";
+import {BrowserModule} from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { FormsModule } from "@angular/forms";
 
 
@@ -24,7 +27,8 @@ import { FormsModule } from "@angular/forms";
     AlertModule.forRoot(),
     TabsModule.forRoot(),
     AccordionModule.forRoot(),
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    BrowserModule, BrowserAnimationsModule, NgxChartsModule
   ],
   declarations: [
     CrackdraftComponent, 

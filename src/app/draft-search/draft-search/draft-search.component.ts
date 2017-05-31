@@ -22,7 +22,7 @@ export class DraftSearchComponent implements OnInit {
   constructor(private _dbService: DbService) { }
 
   ngOnInit() {
-    this.pageSize = 20;
+    this.pageSize = 15;
     this.pageNumber = 0;
     if (!this.username) this.username = null;
     if (!this.isPaginated) this.isPaginated = false;
@@ -42,8 +42,6 @@ export class DraftSearchComponent implements OnInit {
   }
 
   refreshTable() {
-    //this.draftData = null;
-    console.log(this.username,this.pageNumber);
     this._dbService.getDraftsCount(this.username)
       .subscribe(count => {
         if (count.error) {
@@ -74,10 +72,7 @@ export class DraftSearchComponent implements OnInit {
 
   pageChanged(event:any) {
     this.pageNumber = event.page-1;    
-    this.refreshTable();
-    
-  //  this.pageNumber += direction;
-    
+    this.refreshTable();    
   }
 
 }

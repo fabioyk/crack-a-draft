@@ -1,0 +1,8 @@
+.stat-panel {
+  height: 300px;  
+}
+
+.chart-panel {
+  display: flex;
+  justify-content: center;
+}

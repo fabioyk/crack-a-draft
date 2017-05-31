@@ -68,7 +68,7 @@ export class CrackdraftComponent implements OnInit {
   }
 
   onCardClicked(cardIndex:number, cardName:string):void {
-    //console.log(cardIndex);
+    console.log(cardIndex);
     this.myPickedIndex.push(cardIndex);
 
     this.currentPick++;

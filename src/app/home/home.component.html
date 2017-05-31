@@ -1,22 +1,28 @@
 <div class="container">
+  <div class="jumbotron">
+    <h1><i class="fa fa-cubes" aria-hidden="true"></i> Crack a Draft</h1>
+    <p>Cracking a pack is opening a booster pack to discuss what we would pick in a draft. 
+      Here in Crack a Draft we use real MTGO drafts submitted by you to simulate not only pack 1 pick 1,
+      but the first 8 picks of a draft.</p>
+  </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="panel panel-default">
+      <div class="panel top-panel panel-default">
         <div class="panel-heading">
           <i class="fa fa-cubes" aria-hidden="true"></i> Crack a Draft
         </div>
-        <div class="panel-body">
+        <div class="panel-body top-panel-body">
           <p>The draft is choosed randomly from the format you pick below. Or simply go for All Random if you can't choose!</p>
           <app-format-chooser></app-format-chooser>
         </div>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="panel panel-default">
+      <div class="panel top-panel panel-default">
         <div class="panel-heading">
           <i class="fa fa-upload" aria-hidden="true"></i> Upload a Draft
         </div>
-        <div class="panel-body">
+        <div class="panel-body top-panel-body">
           <app-draft-upload></app-draft-upload>
           <a (click)='lgModal.show()'>What do I need to upload?</a>
 
