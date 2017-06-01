@@ -13,12 +13,16 @@ import { CrackModule } from "app/crack/crack.module";
 import { DraftSearchModule } from "app/draft-search/draft-search.module";
 
 import { AlertModule, BsDropdownModule, ModalModule } from 'ngx-bootstrap';
+import { AboutComponent } from './about/about.component';
+import { DonateComponent } from './donate/donate.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent    
+    HomeComponent,
+    AboutComponent,
+    DonateComponent    
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,9 @@ import { AlertModule, BsDropdownModule, ModalModule } from 'ngx-bootstrap';
     CrackModule,
     DraftSearchModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent}
+      { path: '', component: HomeComponent},
+      { path: 'about', component: AboutComponent },
+      { path: 'donate', component: DonateComponent}
     ]),
     AlertModule.forRoot(),
     BsDropdownModule.forRoot(),

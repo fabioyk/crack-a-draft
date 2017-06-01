@@ -1,4 +1,7 @@
 .top-panel {
-  height: 200px;
+  height: 200px;  
+}
+
+.has-scroll {
   overflow-y: auto;
 }
