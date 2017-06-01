@@ -3,6 +3,6 @@
   color: #CCCCCC;
   text-align: center;
   margin-top: 50px;
-  height: 150px;
+  min-height: 150px;
   padding: 30px;
 }

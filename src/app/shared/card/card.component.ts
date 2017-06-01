@@ -11,6 +11,8 @@ export class CardComponent implements OnInit {
   @Input() stats: number;
   @Input() stacked: boolean;
   @Input() clickable: boolean;
+  @Input() cutout: boolean;
+  @Input() altTitle: string;
   cardImageUrl: string;
   pickrate:string;
   @Input() index: number;
@@ -26,6 +28,9 @@ export class CardComponent implements OnInit {
     }
     if (this.stats) {
       this.pickrate = this.stats.toFixed(2);
+    }
+    if (!this.altTitle) {
+      this.altTitle = this.cardName;
     }
   }
 

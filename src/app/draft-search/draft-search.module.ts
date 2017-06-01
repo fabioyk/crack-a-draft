@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule} from '@angular/router';
 import { SharedModule } from "app/shared/shared.module";
 import { DraftSearchComponent } from './draft-search/draft-search.component';
-import { PaginationModule } from "ngx-bootstrap";
+import { PaginationModule, TooltipModule } from "ngx-bootstrap";
 import { FormsModule } from "@angular/forms";
 
 @NgModule({
@@ -12,6 +12,7 @@ import { FormsModule } from "@angular/forms";
     SharedModule,
     FormsModule,
     PaginationModule.forRoot(),
+    TooltipModule.forRoot(),
     RouterModule.forChild([
       { path: 'search', component: DraftSearchComponent }
     ])

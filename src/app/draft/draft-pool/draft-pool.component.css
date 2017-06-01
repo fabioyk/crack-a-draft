@@ -8,9 +8,14 @@
 }
 
 .column {
-
   width: 165px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .column {
+    width: 115px;
+  }
 }
 
 

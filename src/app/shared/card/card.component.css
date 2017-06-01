@@ -1,6 +1,10 @@
+:host {
+  margin-right: -3px;
+  min-height: 100px;
+}
+
 .card-container {
   position: relative;  
-  width: 100%;
 }
 .card-container:last-child {
   height: 100%;
@@ -20,11 +24,24 @@
   .card-img {
     height: 163px;
     width: 115px;
+    padding: 1px;
   }
 
   .stack {
-    margin-bottom: 144px;
+    margin-bottom: -144px;
   }
+}
+
+.cutout-container {
+  position: relative;
+  min-height: 99px;
+  width: 183px;
+}
+.cutout {
+  position: absolute;
+  clip: rect(37px, 203px, 166px, 20px);
+  margin-top: -57px;
+  margin-left: -19px;
 }
 
 .clickable {

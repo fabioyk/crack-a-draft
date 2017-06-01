@@ -22,7 +22,7 @@ export class DraftSearchComponent implements OnInit {
   constructor(private _dbService: DbService) { }
 
   ngOnInit() {
-    this.pageSize = 15;
+    this.pageSize = 20;
     this.pageNumber = 0;
     if (!this.username) this.username = null;
     if (!this.isPaginated) this.isPaginated = false;
@@ -48,7 +48,7 @@ export class DraftSearchComponent implements OnInit {
           this.errorMessage = count.error;
         } else {
           this.totalDraftCount = count.count;
-          this.totalPages = Math.ceil(this.totalDraftCount / this.pageSize) - 1;
+          this.totalPages = Math.ceil(this.totalDraftCount / this.pageSize) - 1;          
         }
       },
       error => this.errorMessage = <any> error);

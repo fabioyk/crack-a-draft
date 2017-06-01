@@ -5,41 +5,41 @@
   </div>  
   <button class='btn btn-primary' (click)='onButtonClick(textbox.value)'>Search</button>
   <button class='btn btn-default' (click)='onButtonClick("")'>Reset</button>
-  </form>
+</form>
   <br>
-  <div>
+<div class='container-fluid'>
   <div class="loading" *ngIf='!draftData'>
     Loading~
   </div>
 
-  <div class="result-table table-responsive" *ngIf='draftData'>
-    <table class='table table-striped table-hover'>
-      <tr>
-        <th>Posted by</th>
-        <th>Format</th>
-        <th># Cracked</th>
-        <th>Crack</th>
-        <th>View</th>
-      </tr>
+  <div class="row">
+  <div class="panel-container" *ngIf='draftData'> 
+    <div class="panel panel-default crack-panel" *ngFor='let draftRow of draftData'>
+      <div class="panel-body crack-panel-body">
+        <a [routerLink]="['/crack', draftRow.draft._id]"><app-card
+          [cardName]='draftRow.draft.packs[0][13]' 
+          [cutout]='true'
+          altTitle='Crack this draft!'></app-card></a>
+        <p><a [routerLink]="['/crack', draftRow.draft._id]" 
+              title='Crack this draft!'>
+              {{draftRow.format.name}} Draft
+           </a> 
+          <span class="badge" 
+                *ngIf='draftRow.draft.cracks.length > 0'
+                tooltip='Number of Crack a Drafts done for this draft'>{{draftRow.draft.cracks.length}}</span></p>
+        <p>by <a (click)='onClickName(draftRow.draft.drafter)'>{{draftRow.draft.drafter}}</a></p>
+        <p><a [routerLink]="['/draft', draftRow.draft._id]"><i class="fa fa-list-alt" aria-hidden="true"></i> View Draft Stats</a></p>
+      </div>
+    </div>
 
-      <tr *ngFor='let draftRow of draftData'>
-        <td><a (click)='onClickName(draftRow.draft.drafter)'>{{draftRow.draft.drafter}}</a></td>
-        <td>{{draftRow.format.name}}</td>
-        <td *ngIf='draftRow.draft.cracks.length === 0'>{{draftRow.draft.cracks.length}}</td>
-        <td *ngIf='draftRow.draft.cracks.length > 0'>
-          {{draftRow.draft.cracks.length}} <a [routerLink]="['/stats', draftRow.draft._id]"><i class="fa fa-pie-chart" aria-hidden="true"></i></a>
-        </td>
-        <td><a [routerLink]="['/crack', draftRow.draft._id]"><i class="fa fa-cubes" aria-hidden="true"></i></a></td>
-        <td><a [routerLink]="['/draft', draftRow.draft._id]"><i class="fa fa-list-alt" aria-hidden="true"></i></a></td>
-      </tr>
-    </table>
-    <div *ngIf='isPaginated && totalDraftCount && totalDraftCount > pageSize'>
+    </div>
+  </div>
+  
+  <div *ngIf='isPaginated && totalDraftCount && totalDraftCount > pageSize'>
 
       <pagination [totalItems]="totalDraftCount" [(ngModel)]="pageNumber" [maxSize]="10" 
                   [itemsPerPage]="pageSize" class="pagination-sm"
                   (pageChanged)="pageChanged($event)"></pagination>
     </div>
-  </div>
-  
 </div>
 
