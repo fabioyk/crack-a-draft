@@ -1,41 +1,43 @@
-<div class="container">
-  <div class="loading" *ngIf='!draftData'>
-    <p *ngIf='!errorMessage'>Loading draft~</p>
-    <alert type="danger" *ngIf='errorMessage'>
-      Draft not found
-    </alert>
-  </div>
-  <div class="draft" *ngIf='draftData'>
-    <h2>{{draftData.draft.drafter}}'s {{draftData.format.name}} Draft</h2>
-    <p><a [routerLink]="['/crack', draftData.draft._id]">
-      <i class="fa fa-cubes" aria-hidden="true"></i> Crack this draft</a>
-      <span *ngIf='draftData.draft.cracks.length > 0'>| 
-        <a [routerLink]="['/stats', draftData.draft._id]">
-      <i class="fa fa-pie-chart" aria-hidden="true"></i> Draft Stats</a>
-      </span>
-    </p>
-  </div>
-</div>
-<div class="container-fluid">
-<tabset #staticTabs *ngIf='draftData'>
-  <tab heading='Draft Picks'>
-    <div class="pack" *ngFor='let pack of draftData.draft.packs; let packIndex = index'>
-      <h3>{{calculatePackPickString(packIndex)}}</h3>
-      <app-card *ngFor='let card of pack; let pickIndex = index'
-        [cardName]='card'
-        [index]='pickIndex'
-        [picked]='draftData.draft.picks[packIndex]===pickIndex'
-      >
-      <hr *ngIf='packIndex < 3'>
-      </app-card>
+<div class="view">
+  <div class="container">
+    <div class="loading" *ngIf='!draftData'>
+      <p *ngIf='!errorMessage'>Loading draft~</p>
+      <alert type="danger" *ngIf='errorMessage'>
+        Draft not found
+      </alert>
     </div>
-  </tab>
-  <tab heading='Card Pool'>
-    <div class="pool">
-      <app-draft-pool
-        [draftData]='draftData'>
-      </app-draft-pool>
+    <div class="draft" *ngIf='draftData'>
+      <h2>{{draftData.draft.drafter}}'s {{draftData.format.name}} Draft</h2>
+      <p><a [routerLink]="['/crack', draftData.draft._id]">
+        <i class="fa fa-cubes" aria-hidden="true"></i> Crack this draft</a>
+        <span *ngIf='draftData.draft.cracks.length > 0'>| 
+          <a [routerLink]="['/stats', draftData.draft._id]">
+        <i class="fa fa-pie-chart" aria-hidden="true"></i> Draft Stats</a>
+        </span>
+      </p>
     </div>
-  </tab>
-</tabset>
+  </div>
+  <div class="container-fluid">
+  <tabset #staticTabs *ngIf='draftData'>
+    <tab heading='Draft Picks'>
+      <div class="pack" *ngFor='let pack of draftData.draft.packs; let packIndex = index'>
+        <h3>{{calculatePackPickString(packIndex)}}</h3>
+        <app-card *ngFor='let card of pack; let pickIndex = index'
+          [cardName]='card'
+          [index]='pickIndex'
+          [picked]='draftData.draft.picks[packIndex]===pickIndex'
+        >
+        <hr *ngIf='packIndex < 3'>
+        </app-card>
+      </div>
+    </tab>
+    <tab heading='Card Pool'>
+      <div class="pool">
+        <app-draft-pool
+          [draftData]='draftData'>
+        </app-draft-pool>
+      </div>
+    </tab>
+  </tabset>
+  </div>  
 </div>

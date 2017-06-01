@@ -12,12 +12,23 @@
   padding: 2px;
 }
 
-.clickable {
-  cursor: pointer;
-}
-
 .stack {
   margin-bottom: -207px;
+}
+
+@media (max-width: 768px) {
+  .card-img {
+    height: 163px;
+    width: 115px;
+  }
+
+  .stack {
+    margin-bottom: 144px;
+  }
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .pick {

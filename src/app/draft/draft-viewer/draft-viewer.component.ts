@@ -54,4 +54,8 @@ export class DraftViewerComponent implements OnInit {
     return 'Pack ' + pack + ' Pick ' + pick;
   }
 
+  gotoTop() {
+    window.scrollTo(0,0);
+  }
+
 }
