@@ -35,7 +35,6 @@ export class DraftSearchComponent implements OnInit {
     this.username = name.trim();
     this.isPaginated = this.username !== '';
     this.hardRefreshTable();
-    console.log(this.queryString);
   }
 
   hardRefreshTable() {

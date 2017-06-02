@@ -5,6 +5,7 @@ import { CardComponent } from './card/card.component';
 import { CardService } from './card.service';
 import { DbService } from './db.service';
 import { UtilsService } from './utils.service';
+import { TooltipModule } from "ngx-bootstrap";
 
 @NgModule({
   imports: [

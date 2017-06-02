@@ -36,6 +36,8 @@ export class DraftInfoComponent implements OnInit {
 
             if (this.crackId) {
               this.isDraftPicksStartingTab = false;
+            } else {
+              this.isDraftPicksStartingTab = true;
             }
     });
   }

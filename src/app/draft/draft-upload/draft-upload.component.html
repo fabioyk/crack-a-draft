@@ -15,7 +15,9 @@
         (change)="isAnonymous = $event.target.checked">
         Don't publish my MTGO username
       </label>      
-    <button class='btn btn-primary pull-right' (click)="submit($event)">Upload</button>
+    <button class='btn btn-primary pull-right' 
+            (click)="submit($event)"
+            [disabled]="isSubmitting">Upload</button>
   </div>
   <div class="files-uploaded" *ngIf='draftIds'>
     Drafts uploaded:

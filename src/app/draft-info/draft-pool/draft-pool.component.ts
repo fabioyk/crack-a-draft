@@ -21,15 +21,27 @@ export class DraftPoolComponent implements OnInit {
   
   sortBy: string;
   isColumnView: boolean;
+  hoveredCard: string;
+
+  isLeft:boolean;
 
   constructor() { }
 
   ngOnInit() {
+    this.isLeft = false;
     this.isColumnView = false;
     if (this.draftData) {
       this.createCardPoolArray(this.draftData);
       this.sortCardPoolArray('color');
     }
+  }
+
+  onMouseOver(card:ICard) {
+    this.hoveredCard = card.name;
+  }
+
+  onHoverCardMouseOver() {
+    this.isLeft = !this.isLeft;
   }
 
    sortCardPoolArray(sortBy:string) {

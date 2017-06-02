@@ -15,20 +15,24 @@ export class DraftUploadComponent implements OnInit {
   filename: string; 
   isAnonymous: boolean;
   errorMessage: string;
+  isSubmitting: boolean;
 
   constructor(public uploaderService: Uploader,
               private _router: Router,
               private _route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.isSubmitting = false;
   }
 
   submit() {
+    this.isSubmitting = true;
     let uploadFile = (<HTMLInputElement>window.document.getElementById('draftUploadField')).files[0];
 
     let myUploadItem = new DraftUploadItem(uploadFile, this.isAnonymous);
     //myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
     this.uploaderService.onCompleteUpload = (item, response, status, headers) => {
+      this.isSubmitting = false;
       console.log('Uploaded');
       if (response && !JSON.parse(response).error) {
         var responseJson = JSON.parse(response);

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+
+var self;
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  @ViewChild('footer') elementView: ElementRef;
+  footerHeight: number;
+
+  ngOnInit() {
+    self = this;
+    window.onresize = this.updateFooterHeight;
+    this.updateFooterHeight();
+  }
+
+  updateFooterHeight() {
+    self.footerHeight = self.elementView.nativeElement.offsetHeight;
+  }
 }

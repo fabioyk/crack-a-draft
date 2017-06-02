@@ -6,11 +6,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prod": "ng build --prod --base-href \"http://crackadraft.com\"",
-    "ngh": "build"
+    "prod": "ng build --prod --base-href \"http://crackadraft.com\""
   },
   "private": true,
   "dependencies": {

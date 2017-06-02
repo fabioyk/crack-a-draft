@@ -3,10 +3,10 @@
   <div class='pull-right'>
     <button class='btn btn-primary' 
             (click)='setAllAccordions(true)'
-            [disabled]='crackAccordions.indexOf(true) !== -1'>Open All</button>
+            [disabled]='crackAccordions.indexOf(false) === -1'>Open All</button>
     <button class='btn btn-primary' 
             (click)='setAllAccordions(false)'
-            [disabled]='crackAccordions.indexOf(false) !== -1'>Close All</button>
+            [disabled]='crackAccordions.indexOf(true) === -1'>Close All</button>
   </div>
   <hr>
   <accordion>

@@ -8,10 +8,12 @@ import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angu
 export class CardComponent implements OnInit {
   @Input() cardName: string;
   @Input() picked: boolean;
+  @Input() pile: boolean;
   @Input() stats: number;
   @Input() stacked: boolean;
   @Input() clickable: boolean;
   @Input() cutout: boolean;
+  @Input() hoverCard:boolean;
   @Input() altTitle: string;
   cardImageUrl: string;
   pickrate:string;
@@ -35,8 +37,9 @@ export class CardComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if (this.cardName === 'Orzhov Signet') {
-      console.log(this.stacked);
+    if (this.cardName) {
+      this.cardImageUrl = 'http://gatherer.wizards.com/Handlers/Image.ashx?type=card&name=' 
+        + this.cardName;
     }
   }
 

@@ -40,7 +40,7 @@
     </div>
   </div>
   
-  <div *ngIf='isPaginated && totalDraftCount && totalDraftCount > pageSize'>
+  <div *ngIf='totalDraftCount && totalDraftCount > pageSize'>
 
       <pagination [totalItems]="totalDraftCount" [(ngModel)]="pageNumber" [maxSize]="10" 
                   [itemsPerPage]="pageSize" class="pagination-sm"

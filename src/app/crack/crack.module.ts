@@ -4,7 +4,6 @@ import { CrackdraftComponent } from './crackdraft/crackdraft.component';
 import { FormatChooserComponent } from './format-chooser/format-chooser.component';
 import { SharedModule } from "app/shared/shared.module";
 import { RouterModule } from "@angular/router";
-import { DraftStatsComponent } from "./draft-stats/draft-stats.component";
 import { AlertModule, TabsModule, AccordionModule, ButtonsModule, TooltipModule } from "ngx-bootstrap";
 import {BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

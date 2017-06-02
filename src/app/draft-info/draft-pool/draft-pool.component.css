@@ -1,6 +1,3 @@
-.top-pool {
-}
-
 .pool-stacked {
   display: flex;
   flex-wrap: wrap;
@@ -8,16 +5,33 @@
 }
 
 .column {
-  width: 165px;
+  width: 180px;
   text-align: center;
+}
+
+.hovered-card {  
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
 }
 
 @media (max-width: 768px) {
   .column {
-    width: 115px;
+    width: 140px;
+  }
+
+  .hovered-card {
+    display: none;
   }
 }
-
 
 .column app-card:last-child div img {
   margin-bottom: 0;
