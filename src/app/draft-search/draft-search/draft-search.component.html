@@ -1,7 +1,12 @@
 <form>
   <div class='form-group'>
     <label for='textbox'>Search for MTGO Username:</label>
-    <input #textbox type='text' class='form-control' name='name' (keyup.enter)='onButtonClick(textbox.value)'>
+    <input #textbox type='text' 
+          class='form-control' 
+          [(ngModel)]='username' 
+          name='name' 
+          (keyup.enter)='onButtonClick(textbox.value)'
+          maxlength='25'>
   </div>  
   <button class='btn btn-primary' (click)='onButtonClick(textbox.value)'>Search</button>
   <button class='btn btn-default' (click)='onButtonClick("")'>Reset</button>
@@ -27,7 +32,7 @@
           <span class="badge" 
                 *ngIf='draftRow.draft.cracks.length > 0'
                 tooltip='Number of Crack a Drafts done for this draft'>{{draftRow.draft.cracks.length}}</span></p>
-        <p>by <a (click)='onClickName(draftRow.draft.drafter)'>{{draftRow.draft.drafter}}</a></p>
+        <p>by <a (click)='onButtonClick(draftRow.draft.drafter)'>{{draftRow.draft.drafter}}</a></p>
         <p><a [routerLink]="['/draft', draftRow.draft._id]"><i class="fa fa-list-alt" aria-hidden="true"></i> View Draft Stats</a></p>
       </div>
     </div>

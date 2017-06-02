@@ -1,0 +1,38 @@
+<div class="container-fluid panel-group" *ngIf='draftData.draft.cracks.length > 0'>
+  <div class="col-md-6">
+    <div class="panel stat-panel panel-default">
+      <div class="panel-heading">
+        Most Common Archetypes
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class='table'>
+            <tr>
+              <th>Archetype</th>
+              <th>#</th>
+            </tr>
+            <tr *ngFor='let arch of topArchetypes'>
+              <td>{{arch.name}}</td>
+              <td>{{arch.count}}</td>
+            </tr>
+          </table>
+        </div>              
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel stat-panel panel-default">
+      <div class="panel-heading">
+        Colors Used
+      </div>
+      <div class="panel-body chart-panel">
+        <ngx-charts-pie-chart
+          [view]='pieChartSize'
+          [results]='colorChartData'
+          [scheme]='colorChartScheme'
+          *ngIf='colorChartData'
+        ></ngx-charts-pie-chart>
+      </div>
+    </div>
+  </div>        
+</div>

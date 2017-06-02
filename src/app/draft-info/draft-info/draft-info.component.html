@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="loading" *ngIf='!draftData'>
+    <span *ngIf='!errorMessage'>Loading draft~</span>
+    <alert type="danger" *ngIf='errorMessage'>
+      Draft not found
+    </alert>
+  </div>
+  <div *ngIf='draftData'>
+    <h2>{{draftData.draft.drafter}}'s {{draftData.format.name}} Draft</h2>
+    <p><a [routerLink]="['/crack', draftData.draft._id]">
+      <i class="fa fa-cubes" aria-hidden="true"></i> Crack this draft</a>
+  </div>
+</div>
+<div class="container-fluid">
+  <tabset #staticTabs type='pills' *ngIf='draftData'>
+    <tab heading='Draft Picks' [active]='isDraftPicksStartingTab'>
+      <app-draft-picks
+        [draftData]='draftData'>
+      </app-draft-picks>
+    </tab>
+    <tab heading='Card Pool'>
+      <app-draft-pool
+        [draftData]='draftData'>
+      </app-draft-pool>
+    </tab>
+    <tab heading='Pick Rate'
+         [disabled]='draftData.draft.cracks.length === 0'
+         title='test'
+         [active]='!isDraftPicksStartingTab'>
+      <app-pick-rate
+        [draftData]='draftData'
+        [crackData]='crackData'
+        *ngIf='draftData.draft.cracks.length > 0'>
+      </app-pick-rate>
+    </tab>
+    <tab heading='Statistics'
+         [disabled]='draftData.draft.cracks.length === 0'>
+      <app-stats
+        [draftData]='draftData'
+        *ngIf='draftData.draft.cracks.length > 0'>
+      </app-stats>
+    </tab>
+    <tab heading='All First 8 Picks'>
+      <app-first-picks
+        [draftData]='draftData'>
+      </app-first-picks>
+    </tab>    
+  </tabset>
+</div>

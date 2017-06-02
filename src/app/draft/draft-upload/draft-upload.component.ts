@@ -3,7 +3,7 @@ import { Http, RequestOptions, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { Uploader } from "angular2-http-file-upload";
 import { DraftUploadItem } from "app/draft/draft-upload/draft-upload-item";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-draft-upload',
@@ -17,7 +17,8 @@ export class DraftUploadComponent implements OnInit {
   errorMessage: string;
 
   constructor(public uploaderService: Uploader,
-              private _router: Router) { }
+              private _router: Router,
+              private _route: ActivatedRoute) { }
 
   ngOnInit() {
   }

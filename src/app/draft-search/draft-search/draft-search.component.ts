@@ -8,6 +8,7 @@ import { DbService } from "app/shared/db.service";
   styleUrls: ['./draft-search.component.css']
 })
 export class DraftSearchComponent implements OnInit {
+  queryString: string;
   username: string;
   isPaginated: boolean;
   draftData: IDraft[];
@@ -31,9 +32,10 @@ export class DraftSearchComponent implements OnInit {
   }
 
   onButtonClick(name: string) {
-    this.username = name;
+    this.username = name.trim();
     this.isPaginated = this.username !== '';
     this.hardRefreshTable();
+    console.log(this.queryString);
   }
 
   hardRefreshTable() {
@@ -41,7 +43,7 @@ export class DraftSearchComponent implements OnInit {
     this.refreshTable();
   }
 
-  refreshTable() {
+  refreshTable() {    
     this._dbService.getDraftsCount(this.username)
       .subscribe(count => {
         if (count.error) {
@@ -62,12 +64,6 @@ export class DraftSearchComponent implements OnInit {
           }
         },
       error => this.errorMessage = <any>error);
-  }
-
-  onClickName(name:string) {
-    this.username = name;
-    this.isPaginated = true;
-    this.hardRefreshTable();
   }
 
   pageChanged(event:any) {

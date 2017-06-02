@@ -1,0 +1,29 @@
+<div class="container-fluid" *ngIf='draftData'>
+  <div *ngIf='crackData'>
+    <h3>Your 8 picks:</h3>
+    <app-card *ngFor='let pick of crackData.picks; let i = index'
+        [cardName]='draftData.draft.packs[i][pick]'>
+    </app-card>
+  </div>
+  <div>
+    <h3>
+      {{draftData.draft.drafter}}'s First 8 picks:
+    </h3>
+    <app-card *ngFor='let pick of (draftData.draft.picks.slice(0,8)); let i = index'
+        [cardName]='draftData.draft.packs[i][pick]'>
+    </app-card>
+
+    <div class="draft">
+      <h3>Pick rate, by {{draftData.draft.cracks.length+1}} people:</h3>
+
+      <div class="pack" *ngFor='let pack of (draftData.draft.packs.slice(0,8)); let packIndex = index'>
+        <h4>{{calculatePackPickString(packIndex)}}</h4>
+        <app-card *ngFor='let card of pack; let pickIndex = index'
+          [cardName]='card'
+          [stats]='pickCounts[packIndex][pickIndex]'
+        >
+        </app-card>
+    </div>
+    </div>
+  </div>
+</div>

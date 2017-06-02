@@ -15,6 +15,7 @@ import { DraftSearchModule } from "app/draft-search/draft-search.module";
 import { AlertModule, BsDropdownModule, ModalModule } from 'ngx-bootstrap';
 import { AboutComponent } from './about/about.component';
 import { DonateComponent } from './donate/donate.component';
+import { DraftInfoModule } from "app/draft-info/draft-info.module";
 
 
 @NgModule({
@@ -31,9 +32,9 @@ import { DonateComponent } from './donate/donate.component';
     DraftModule,
     CrackModule,
     DraftSearchModule,
+    DraftInfoModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent},
-      { path: 'about', component: AboutComponent },
       { path: 'donate', component: DonateComponent}
     ]),
     AlertModule.forRoot(),
