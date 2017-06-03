@@ -114,7 +114,7 @@ export class CrackdraftComponent implements OnInit {
     this._dbService.uploadCrack(this.draftId, this.myPickedIndex, archetype)
       .subscribe(crackId => {        
         if (crackId) {
-          this._router.navigate(['/stats', this.draftId, crackId]);
+          this._router.navigate(['/draft', this.draftId, crackId]);
         }
         this.isSubmitting = false;
       })
