@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Http, RequestOptions, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import { Uploader } from "angular2-http-file-upload";
@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./draft-upload.component.css']
 })
 export class DraftUploadComponent implements OnInit {
+  @Output() uploaded = new EventEmitter<string>();
   draftIds: string[];
   filename: string; 
   isAnonymous: boolean;
@@ -39,6 +40,7 @@ export class DraftUploadComponent implements OnInit {
         } else {
           this.draftIds = response.ids;
           this.filename = response.filename;
+          this.uploaded.emit(response.ids.length.toString());
         }
       } else if (response.error) {
         this.errorMessage = response.error;

@@ -13,7 +13,7 @@
         </div>
         <div class="panel-body top-panel-body">
           <p>Do a random Crack a Draft by selecting your favorite format below or go All Random if you can't decide!</p>
-          <app-format-chooser></app-format-chooser>
+          <app-format-chooser #formatChooser></app-format-chooser>
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
           <i class="fa fa-upload" aria-hidden="true"></i> Upload a Draft
         </div>
         <div class="panel-body top-panel-body has-scroll">
-          <app-draft-upload></app-draft-upload>
+          <app-draft-upload (uploaded)="draftSearch.refreshTable()" (uploaded)="formatChooser.load()"></app-draft-upload>
           <a (click)='lgModal.show()'>What do I need to upload?</a>
 
           <div bsModal #lgModal='bs-modal' class='modal fade'
@@ -62,7 +62,7 @@
           <i class="fa fa-search" aria-hidden="true"></i> Recently Uploaded Drafts
         </div>
         <div class="panel-body">
-          <app-draft-search></app-draft-search>
+          <app-draft-search #draftSearch></app-draft-search>
         </div>
       </div>      
     </div>

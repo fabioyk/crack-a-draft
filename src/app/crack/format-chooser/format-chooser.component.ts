@@ -10,7 +10,7 @@ import { IFormat } from "app/format";
   templateUrl: './format-chooser.component.html',
   styleUrls: ['./format-chooser.component.css']
 })
-export class FormatChooserComponent implements OnInit {
+export class FormatChooserComponent implements OnInit {  
   formatList:IFormat[];
   errorMessage: string;
   chosenFormat: string;
@@ -20,6 +20,13 @@ export class FormatChooserComponent implements OnInit {
               private _dbService: DbService) { }
 
   ngOnInit() {
+    this.load();
+  }
+
+  load() {
+    this.formatList = [];
+    this.errorMessage = null;
+    
     this._dbService.getFormats()
       .subscribe(formats =>  {
         if (formats[0].error) {
