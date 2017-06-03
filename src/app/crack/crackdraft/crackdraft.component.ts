@@ -70,7 +70,6 @@ export class CrackdraftComponent implements OnInit {
   }
 
   onCardClicked(cardIndex:number, cardName:string):void {
-    console.log(cardIndex);
     this.myPickedIndex.push(cardIndex);
 
     this.currentPick++;
@@ -85,16 +84,13 @@ export class CrackdraftComponent implements OnInit {
         this.updateColorCount(cardData[0]);
         if (this.currentState === 2) {
           this.setColorCheckboxesDefault();
-          console.log(this.myPickedIndex);
-          console.log(this.myPickedCards);
-          console.log(this.colorCount);
         }
       });
   }
 
   updateColorCount(newCard:ICard):void {
-    if (newCard.colors)
-      newCard.colors.forEach((color) => this.colorCount[color]++);
+    if (newCard.colorIdentity)
+      newCard.colorIdentity.forEach((color) => this.colorCount[color]++);
   }
 
   setColorCheckboxesDefault():void {

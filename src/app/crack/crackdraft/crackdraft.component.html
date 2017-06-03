@@ -36,16 +36,18 @@
       [cardName]='card.name'>
   </app-card>
   <h3>Which colors do you think you're going to play?</h3>
-  <div class="btn-group">
+  <div class="btn-group form-group">
     <label class="btn btn-default" 
            [ngClass]='colorName'
            [(ngModel)]='colorCheckboxes[i]' 
            btnCheckbox *ngFor='let colorName of colorNames; let i = index'>{{colorName}}</label>
   </div>
+  <div class='form-group'>
   <button 
     class='btn btn-primary'
     (click)='onSubmitCrackDraft()'
     [disabled]='(!colorCheckboxes[0] && !colorCheckboxes[1] && !colorCheckboxes[2] && !colorCheckboxes[3] && !colorCheckboxes[4]) || isSubmitting'>
     Submit Crack a Draft</button>
+  </div>
 </div>
 </div>

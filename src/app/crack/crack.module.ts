@@ -19,7 +19,6 @@ import { DraftModule } from "app/draft/draft.module";
     FormsModule,
     DraftModule,
     RouterModule.forChild([
-      { path: 'crack', component: FormatChooserComponent },
       { path: 'crack/:draftId', component: CrackdraftComponent }      
     ]),
     AlertModule.forRoot(),

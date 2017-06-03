@@ -6,6 +6,7 @@
 .card-container {
   position: relative;  
   display: inline-block;
+  vertical-align: top;
 }
 .card-container:last-child {
   height: 100%;
@@ -22,6 +23,7 @@
 }
 
 .card-string {
+  max-width: 180px;
   text-align: center;
   color: #333;
 }
@@ -43,7 +45,6 @@
 
 @media (max-width: 768px) {
   .card-img:not(.hoverCard) {
-    height: 195px;
     width: 140px;
     padding: 0px;
   }
@@ -54,6 +55,10 @@
 
   .stack {
     margin-bottom: -174px;
+  }
+
+  .card-string {
+    max-width: 140px;
   }
 }
 

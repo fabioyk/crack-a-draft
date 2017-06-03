@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from "app/shared/shared.module";
 import { RouterModule} from '@angular/router';
-
 import { DraftUploadComponent } from './draft-upload/draft-upload.component';
 import { TooltipModule, AlertModule, TabsModule, ButtonsModule } from "ngx-bootstrap";
 import { FormsModule } from "@angular/forms";
@@ -13,7 +12,7 @@ import { FormsModule } from "@angular/forms";
     SharedModule,
     AlertModule,
     FormsModule,
-    RouterModule.forChild([]),
+    RouterModule,
     TooltipModule.forRoot(),
     TabsModule.forRoot(),
     ButtonsModule.forRoot()

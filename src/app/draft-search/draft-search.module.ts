@@ -13,9 +13,7 @@ import { FormsModule } from "@angular/forms";
     FormsModule,
     PaginationModule.forRoot(),
     TooltipModule.forRoot(),
-    RouterModule.forChild([
-      { path: 'search', component: DraftSearchComponent }
-    ])
+    RouterModule,
   ],
   declarations: [DraftSearchComponent],
   exports: [
