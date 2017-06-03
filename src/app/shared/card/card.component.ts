@@ -15,6 +15,7 @@ export class CardComponent implements OnInit {
   @Input() cutout: boolean;
   @Input() hoverCard:boolean;
   @Input() altTitle: string;
+  @Input() draftPicks:boolean;
   cardImageUrl: string;
   pickrate:string;
   @Input() index: number;

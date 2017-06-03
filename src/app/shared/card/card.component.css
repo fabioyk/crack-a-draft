@@ -58,12 +58,16 @@
 }
 .cutout {
   position: absolute;
-  clip: rect(37px, 203px, 166px, 20px);
+  clip: rect(36px, 205px, 166px, 18px);
   margin-top: -57px;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+.draftPicks.card-img:not(.pick) {
+  opacity: 0.8;
 }
 
 .pick {

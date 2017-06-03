@@ -1,7 +1,7 @@
 <span class='card-container' *ngIf='cardImageUrl && !cutout'>
   <!--<div class='card-container'>-->
 <img class='card-img' 
-     [ngClass]="{pick: picked, stack: stacked, pile: pile, hoverCard:hoverCard, clickable: clickable}"
+     [ngClass]="{pick: picked, draftPicks:draftPicks, stack: stacked, pile: pile, hoverCard:hoverCard, clickable: clickable}"
      src={{cardImageUrl}}     
      (click)='onClick()'
      alt={{cardName}}

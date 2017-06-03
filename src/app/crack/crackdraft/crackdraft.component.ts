@@ -23,6 +23,7 @@ export class CrackdraftComponent implements OnInit {
   archetype: String;
   colorCount: object;
   public colorCheckboxes: boolean[];
+  isSubmitting: boolean;
 
   colorNames = ['White', 'Blue', 'Black', 'Red', 'Green'];
   classNames = ['btn-default', 'btn-info', 'btn-black', 'btn-danger', 'btn-success'];
@@ -42,6 +43,7 @@ export class CrackdraftComponent implements OnInit {
     });
     
     this.currentState = 0;
+    this.isSubmitting = false;
 
     this.colorCheckboxes = [false, false, false, false, false];
   }
@@ -106,6 +108,7 @@ export class CrackdraftComponent implements OnInit {
   }
 
   onSubmitCrackDraft():void {
+    this.isSubmitting = true;
     var archetype = '';
     for (var i=0; i<5; i++) {
       if (this.colorCheckboxes[i]) {
@@ -113,10 +116,11 @@ export class CrackdraftComponent implements OnInit {
       }
     }
     this._dbService.uploadCrack(this.draftId, this.myPickedIndex, archetype)
-      .subscribe(crackId => {
+      .subscribe(crackId => {        
         if (crackId) {
           this._router.navigate(['/stats', this.draftId, crackId]);
         }
+        this.isSubmitting = false;
       })
   }
 }

@@ -45,7 +45,7 @@
   <button 
     class='btn btn-primary'
     (click)='onSubmitCrackDraft()'
-    [disabled]='!colorCheckboxes[0] && !colorCheckboxes[1] && !colorCheckboxes[2] && !colorCheckboxes[3] && !colorCheckboxes[4]'>
+    [disabled]='(!colorCheckboxes[0] && !colorCheckboxes[1] && !colorCheckboxes[2] && !colorCheckboxes[3] && !colorCheckboxes[4]) || isSubmitting'>
     Submit Crack a Draft</button>
 </div>
 </div>
