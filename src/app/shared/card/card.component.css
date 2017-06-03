@@ -5,6 +5,7 @@
 
 .card-container {
   position: relative;  
+  display: inline-block;
 }
 .card-container:last-child {
   height: 100%;
@@ -20,12 +21,17 @@
   display: none;
 }
 
+.card-string {
+  text-align: center;
+  color: #333;
+}
+
 .card-img:hover:not(.pile) + .card-hover, .card-hover:hover {
     display: block;
     position: absolute;
     top: 0;
     left: 0;
-    margin-top: -80%;
+    margin-top: -19%;
     margin-left: -13%;
     z-index: 10;
     border-radius: 10px;
@@ -51,15 +57,37 @@
   }
 }
 
-.cutout-container {
+/*.cutout-container {
   position: relative;
   min-height: 99px;
   width: 222px;
 }
+
 .cutout {
   position: absolute;
-  clip: rect(36px, 205px, 166px, 18px);
+  clip-path: inset(36px 18px 139px 18px);
+  -webkit-clip-path: inset(36px 18px 139px 18px);
+  -moz-clip-path: inset(36px 18px 139px 18px);
   margin-top: -57px;
+}*/
+
+.cutout-container {
+  display: inline-block;
+  position: relative;
+  width: 194px;
+  height: 142px;
+  background: gray;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.cutout {
+  position: absolute;
+  top: -33px;
+  left: -14px;
+  clip-path: inset(36px 18px 139px 18px);
+  -webkit-clip-path: inset(36px 18px 139px 18px);
+  -moz-clip-path: inset(36px 18px 139px 18px);
 }
 
 .clickable {
@@ -67,12 +95,12 @@
 }
 
 .draftPicks.card-img:not(.pick) {
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 .pick {
   border-radius: 12px;
-  border: 5px solid red;
+  border: 3px solid red;
   background-color: red;
 }
 

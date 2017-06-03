@@ -1,13 +1,14 @@
 <div *ngIf='draftData'>
   <div class="pack" *ngFor='let pack of draftData.draft.packs; let packIndex = index'>
     <h3>{{calculatePackPickString(packIndex)}}</h3>
-    <app-card *ngFor='let card of pack; let pickIndex = index'
-      [cardName]='card'
-      [index]='pickIndex'
-      [picked]='draftData.draft.picks[packIndex]===pickIndex'
-      [draftPicks]='true'
-    >
-    <hr *ngIf='packIndex < 3'>
-    </app-card>
+    <div class='pack-container'>
+      <app-card *ngFor='let card of pack; let pickIndex = index'
+        [cardName]='card'
+        [index]='pickIndex'
+        [picked]='draftData.draft.picks[packIndex]===pickIndex'
+        [draftPicks]='true'
+      >    
+      </app-card>
+    </div>
   </div>
 </div>

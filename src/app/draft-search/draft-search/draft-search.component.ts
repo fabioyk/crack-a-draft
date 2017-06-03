@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { IDraft } from "app/draft";
 import { DbService } from "app/shared/db.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-draft-search',
@@ -10,8 +13,9 @@ import { DbService } from "app/shared/db.service";
 export class DraftSearchComponent implements OnInit {
   queryString: string;
   username: string;
-  isPaginated: boolean;
   draftData: IDraft[];
+
+  private sub: Subscription;
 
   public pageSize: number;
   public pageNumber: number;
@@ -20,29 +24,46 @@ export class DraftSearchComponent implements OnInit {
 
   private errorMessage: string;
 
-  constructor(private _dbService: DbService) { }
+  constructor(private _route: ActivatedRoute,
+              private _router: Router,
+              private _location: Location,
+              private _dbService: DbService) { }
 
   ngOnInit() {
     this.pageSize = 20;
-    this.pageNumber = 0;
-    if (!this.username) this.username = null;
-    if (!this.isPaginated) this.isPaginated = false;
 
-    this.hardRefreshTable();
+    this.sub = this._route.queryParams.subscribe(
+        params => {
+            this.username = params['name'];
+            this.pageNumber = +params['page'];
+
+            if (this.pageNumber < 0) {
+              this.pageNumber = 0;              
+            }
+
+            console.log(this.username);
+            if (!this.username) this.username = null;
+            if (!this.pageNumber) this.pageNumber = 0;
+
+            this.refreshTable();            
+    });
   }
 
   onButtonClick(name: string) {
-    this.username = name.trim();
-    this.isPaginated = this.username !== '';
+    this.username = name.trim();    
     this.hardRefreshTable();
   }
 
   hardRefreshTable() {
-    this.pageNumber = 0;
+    this.pageNumber = 0;    
     this.refreshTable();
   }
 
-  refreshTable() {    
+  refreshTable() {
+    if (this.pageNumber < 0) {
+      this.pageNumber = 0;
+    }
+    this.updateUrl();
     this._dbService.getDraftsCount(this.username)
       .subscribe(count => {
         if (count.error) {
@@ -66,8 +87,24 @@ export class DraftSearchComponent implements OnInit {
   }
 
   pageChanged(event:any) {
-    this.pageNumber = event.page-1;    
+    this.pageNumber = event.page-1;
     this.refreshTable();    
+  }
+
+  updateUrl() {
+    let url = '/';
+    if (this.username && this.username !== '') {
+      url += '?name=' + this.username;
+    }
+    if (this.pageNumber > 0) {
+      if (url.length === 1) {
+        url += '?';
+      } else {
+        url += '&';
+      }
+      url += 'page=' + this.pageNumber;
+    }    
+    this._location.go(url);
   }
 
 }

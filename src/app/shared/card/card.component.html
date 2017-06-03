@@ -1,4 +1,4 @@
-<span class='card-container' *ngIf='cardImageUrl && !cutout'>
+<div class='card-container' *ngIf='cardImageUrl && !cutout'>
   <!--<div class='card-container'>-->
 <img class='card-img' 
      [ngClass]="{pick: picked, draftPicks:draftPicks, stack: stacked, pile: pile, hoverCard:hoverCard, clickable: clickable}"
@@ -8,14 +8,15 @@
      title={{altTitle}}
 >
 <img class='card-hover'
+  [ngClass]="{clickable: clickable}"
   src={{cardImageUrl}}
   alt={{cardName}}
   title={{altTitle}}
   (click)='onClick()'
   >
 <h1 *ngIf='pickrate'>{{pickrate}}%</h1>
-<!--</div>-->
-</span>
+<div class='card-string' *ngIf='!pile'>{{cardName}}</div>
+</div>
 <div class="cutout-container" *ngIf='cutout'>
   <img 
      class='cutout'

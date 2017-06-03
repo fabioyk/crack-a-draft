@@ -34,7 +34,6 @@ export class DraftUploadComponent implements OnInit {
     this.uploaderService.onCompleteUpload = (item, response, status, headers) => {
       this.isSubmitting = false;
       if (response && !response.error) {
-        console.log(response);
         if (response.ids.length === 1) {
           this._router.navigate(['/draft', response.ids[0]]);
         } else {

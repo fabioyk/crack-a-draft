@@ -5,3 +5,7 @@
 .has-scroll {
   overflow-y: auto;
 }
+
+.jumbotron {
+  background-image: url('/assets/bg.jpg');
+}
