@@ -45,7 +45,6 @@ export class CardComponent implements OnInit {
   }
 
   onClick():void {
-    //console.log('clicked',this.index);
     if (this.index >= 0)
       this.cardClicked.emit(this.index.toString());
   }

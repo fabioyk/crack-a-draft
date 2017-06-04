@@ -41,7 +41,6 @@ export class DraftSearchComponent implements OnInit {
               this.pageNumber = 0;              
             }
 
-            console.log(this.username);
             if (!this.username) this.username = null;
             if (!this.pageNumber) this.pageNumber = 0;
 
