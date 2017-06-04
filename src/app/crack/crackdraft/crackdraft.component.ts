@@ -18,6 +18,7 @@ export class CrackdraftComponent implements OnInit {
   private sub: Subscription;
 
   myPickedIndex: number[];
+  myPickedCardNames: string[];
   myPickedCards: ICard[];
   currentPick: number;
   archetype: String;
@@ -63,6 +64,7 @@ export class CrackdraftComponent implements OnInit {
   startupCrackDraft() {
     this.myPickedIndex = [];
     this.myPickedCards = [];
+    this.myPickedCardNames = [];
     this.currentPick = 1;
     this.colorCount = { W: 0, U:0, B:0, R:0, G:0};
 
@@ -71,26 +73,27 @@ export class CrackdraftComponent implements OnInit {
 
   onCardClicked(cardIndex:number, cardName:string):void {
     this.myPickedIndex.push(cardIndex);
+    this.myPickedCardNames.push(cardName);
 
     this.currentPick++;
 
     if (this.currentPick > 8) {
-      this.currentState = 2;      
-    }
-
-    this._dbService.getCardInfo(cardName)
-      .subscribe(cardData => {
-        this.myPickedCards.push(cardData[0]);
-        this.updateColorCount(cardData[0]);
-        if (this.currentState === 2) {
-          this.setColorCheckboxesDefault();
-        }
-      });
+      this.currentState = 2;   
+      this._dbService.getCardsInfo(this.myPickedCardNames)
+      .subscribe(cards => {
+        this.myPickedCards = cards;
+        this.updateColorCount(this.myPickedCards);
+        this.setColorCheckboxesDefault();        
+      });   
+    }    
   }
 
-  updateColorCount(newCard:ICard):void {
-    if (newCard.colorIdentity)
-      newCard.colorIdentity.forEach((color) => this.colorCount[color]++);
+  updateColorCount(cardArray:ICard[]):void {
+    cardArray.forEach((card) => {
+      if (card.colorIdentity)
+        card.colorIdentity.forEach((color) => this.colorCount[color]++);
+    })
+    
   }
 
   setColorCheckboxesDefault():void {
