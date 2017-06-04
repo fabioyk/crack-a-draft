@@ -31,18 +31,16 @@ export class HomeComponent implements OnInit {
       this.featuredDrafts.forEach((draftId) => {
         this._dbService.getDraft(draftId, false)
           .subscribe(draft => {
-            this.draftData.push(draft);
+            if (!draft.error) {
+              this.draftData.push(draft);
+            }            
           });
       });
       
     }
   }
 
-  updateTables() {
-    
-  }
-
-  onClickAccordion(index:number) {
+  onClickAccordion() {
     this.isAccordionOpen = !this.isAccordionOpen;
   }
 }
