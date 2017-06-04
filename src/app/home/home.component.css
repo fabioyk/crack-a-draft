@@ -9,3 +9,9 @@
 .jumbotron {
   background-image: url('/assets/bg.jpg');
 }
+
+.panel-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

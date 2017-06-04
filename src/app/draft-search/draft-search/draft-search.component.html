@@ -18,25 +18,12 @@
   </div>
 
   <div class="row">
-  <div class="panel-container" *ngIf='draftData'> 
-    <div class="panel panel-default crack-panel" *ngFor='let draftRow of draftData'>
-      <div class="panel-body crack-panel-body">
-        <a [routerLink]="['/crack', draftRow.draft._id]"><app-card
-          [cardName]='draftRow.draft.packs[0][13]' 
-          [cutout]='true'
-          altTitle='Crack this draft!'></app-card></a>
-        <p><a [routerLink]="['/crack', draftRow.draft._id]" 
-              title='Crack this draft!'>
-              {{draftRow.format.name}} Draft
-           </a> 
-          <span class="badge" 
-                *ngIf='draftRow.draft.cracks.length > 0'
-                tooltip='Number of Crack a Drafts done for this draft'>{{draftRow.draft.cracks.length}}</span></p>
-        <p>by <a (click)='onButtonClick(draftRow.draft.drafter)'>{{draftRow.draft.drafter}}</a></p>
-        <p><a [routerLink]="['/draft', draftRow.draft._id]"><i class="fa fa-list-alt" aria-hidden="true"></i> View Draft Stats</a></p>
-      </div>
-    </div>
-
+    <div class="panel-container" *ngIf='draftData'> 
+      <app-draft-badge 
+        *ngFor='let draft of draftData'
+        [draft]='draft'
+        (selectedName)='onButtonClick($event)'>
+      </app-draft-badge>
     </div>
   </div>
   

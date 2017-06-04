@@ -1,0 +1,17 @@
+<div class="panel panel-default crack-panel" >
+  <div class="panel-body crack-panel-body">
+    <a [routerLink]="['/crack', draft.draft._id]"><app-card
+      [cardName]='draft.draft.packs[0][13]' 
+      [cutout]='true'
+      altTitle='Crack this draft!'></app-card></a>
+    <p><a [routerLink]="['/crack', draft.draft._id]" 
+          title='Crack this draft!'>
+          {{draft.format.name}} Draft
+        </a> 
+      <span class="badge" 
+            *ngIf='draft.draft.cracks.length > 0'
+            tooltip='Number of Crack a Drafts done for this draft'>{{draft.draft.cracks.length}}</span></p>
+    <p>by <a (click)='onButtonClick(draft.draft.drafter)'>{{draft.draft.drafter}}</a></p>
+    <p><a [routerLink]="['/draft', draft.draft._id]"><i class="fa fa-list-alt" aria-hidden="true"></i> View Draft Stats</a></p>
+  </div>
+</div>

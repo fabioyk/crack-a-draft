@@ -12,7 +12,7 @@ import { Uploader }      from 'angular2-http-file-upload';
 import { CrackModule } from "app/crack/crack.module";
 import { DraftSearchModule } from "app/draft-search/draft-search.module";
 
-import { AlertModule, BsDropdownModule, ModalModule } from 'ngx-bootstrap';
+import { AlertModule, BsDropdownModule, ModalModule, AccordionModule } from 'ngx-bootstrap';
 import { AboutComponent } from './about/about.component';
 import { DonateComponent } from './donate/donate.component';
 import { DraftInfoModule } from "app/draft-info/draft-info.module";
@@ -33,6 +33,7 @@ import { DraftInfoModule } from "app/draft-info/draft-info.module";
     CrackModule,
     DraftSearchModule,
     DraftInfoModule,
+    AccordionModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent},
       { path: 'donate', component: DonateComponent}

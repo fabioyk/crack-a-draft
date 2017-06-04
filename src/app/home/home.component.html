@@ -55,7 +55,33 @@
           </div>
         </div>
       </div>
-    </div>    
+    </div>
+    <div class="col-md-12">
+      <accordion>
+        <accordion-group (click)='onClickAccordion()' [isOpen]='isAccordionOpen'>
+          <div accordion-heading>
+            <i class="fa fa-star" aria-hidden="true"></i> <strong>Featured:</strong> Pro Tour Amonkhet Drafts
+            <i class='pull-right float-xs-right glyphicon'
+      [ngClass]="{'glyphicon-chevron-down': isAccordionOpen, 'glyphicon-chevron-right': !isAccordionOpen}"></i>
+          </div>          
+          <ul class='list-unstyled'>
+            <li>3-0: Gabriel Nassif and Eric Froehlich</li>
+            <li>2-1: Lee Shi Tian, Marco Cammilluzzi, Martin Juza, Gerard Fabiano, Christian Calcano and Chris Fennell</li>
+          </ul>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="panel-container" *ngIf='draftData'> 
+                <app-draft-badge 
+                  *ngFor='let draft of draftData'
+                  [draft]='draft'
+                  (selectedName)='draftSearch.onButtonClick($event)'>
+                </app-draft-badge>
+              </div>
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+    </div>
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">

@@ -5,6 +5,7 @@ import { SharedModule } from "app/shared/shared.module";
 import { DraftSearchComponent } from './draft-search/draft-search.component';
 import { PaginationModule, TooltipModule } from "ngx-bootstrap";
 import { FormsModule } from "@angular/forms";
+import { DraftBadgeComponent } from './draft-badge/draft-badge.component';
 
 @NgModule({
   imports: [
@@ -15,9 +16,10 @@ import { FormsModule } from "@angular/forms";
     TooltipModule.forRoot(),
     RouterModule,
   ],
-  declarations: [DraftSearchComponent],
+  declarations: [DraftSearchComponent, DraftBadgeComponent],
   exports: [
-    DraftSearchComponent
+    DraftSearchComponent,
+    DraftBadgeComponent
   ]
 })
 export class DraftSearchModule { }
