@@ -27,15 +27,13 @@ export class HomeComponent implements OnInit {
     ];
 
     if (this.featuredDrafts.length > 0) {
-      this.featuredDrafts.forEach((draftId) => {
-        this._dbService.getDraft(draftId, false)
-          .subscribe(draft => {
-            if (!draft.error) {
-              this.draftData.push(draft);
-            }            
-          });
-      });
-      
+      this._dbService.getDraftsById(this.featuredDrafts)
+        .subscribe(drafts => {
+          console.log(drafts);
+          if (!drafts[0].error) {
+            this.draftData = drafts;
+          }
+        });      
     }
   }
 

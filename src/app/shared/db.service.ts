@@ -42,6 +42,13 @@ export class DbService {
       .catch(this.handleError);
   }
 
+  getDraftsById(draftIds:string[]):Observable<IDraft[]> {
+    let queryUrl = this._apiUrl + 'draft?ids=' + draftIds;
+    return this._http.get(queryUrl)
+      .map((response: Response) => <IDraft[]> response.json())
+      .catch(this.handleError);
+  }
+
   getDrafts(drafter:string, pageSize: number, pageNumber: number):Observable<IDraft[]> {
     let queryUrl = this._apiUrl + 'draft?pageSize=' + pageSize +'&pageNumber=' + pageNumber;
     if (drafter) {
