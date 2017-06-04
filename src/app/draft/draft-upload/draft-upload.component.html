@@ -5,7 +5,7 @@
   </alert>
   <div class="upload-form" *ngIf='!draftIds && !errorMessage'>
     <p>Select a MTGO draft log file to upload. Then share your draft and crack a draft links with others.</p>
-    <input name='draftUploadField' id='draftUploadField'
+    <input name='draftUploadField' id='draftUploadField' #draftUploadField
       type="file"
       placeholder="Upload file" 
       accept=".txt">
@@ -17,7 +17,7 @@
       </label>      
     <button class='btn btn-primary pull-right' 
             (click)="submit($event)"
-            [disabled]="isSubmitting">Upload</button>
+            [disabled]="isSubmitting || !draftUploadField.files[0]">Upload</button>
   </div>
   <div class="files-uploaded" *ngIf='draftIds'>
     Drafts uploaded:
