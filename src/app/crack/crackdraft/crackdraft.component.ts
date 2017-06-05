@@ -89,18 +89,19 @@ export class CrackdraftComponent implements OnInit {
       this._dbService.getCardsInfo(this.myPickedCardNames)
       .subscribe(cards => {
         this.myPickedCards = cards;
-        this.updateColorCount(this.myPickedCards);
+        this.updateColorCount(this.myPickedCardNames, this.myPickedCards);
         this.setColorCheckboxesDefault();        
       });   
     }    
   }
 
-  updateColorCount(cardArray:ICard[]):void {
-    cardArray.forEach((card) => {
-      if (card.colorIdentity)
-        card.colorIdentity.forEach((color) => this.colorCount[color]++);
-    })
-    
+  updateColorCount(cardNames:string[], cardArray:ICard[]):void {
+    cardNames.forEach((cardName) => {
+      cardArray.forEach((card) => {
+        if (card.name === cardName && card.colorIdentity)
+          card.colorIdentity.forEach((color) => this.colorCount[color]++);
+      })
+    });
   }
 
   setColorCheckboxesDefault():void {
