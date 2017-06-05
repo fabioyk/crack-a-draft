@@ -1,9 +1,7 @@
 <nav class="navbar navbar-default">
   <div class="container">
-    <a class='navbar-brand stylized-font' [routerLink]="['']"><img src="assets/crackadraft_logo_small.png" class="small-logo" alt="logo"> Crack a Draft</a>
-    <ul class="nav navbar-nav navbar-right">   
-      <li><a [routerLink]="['/donate']">Donate</a></li>
-    </ul>
+    <a class='navbar-brand navbar-left stylized-font' [routerLink]="['']"><img src="assets/crackadraft_logo_small.png" class="small-logo" alt="logo"> Crack a Draft</a>
+    <a class='navbar-brand navbar-right' [routerLink]="['/donate']">Donate</a>    
   </div>
 </nav>
 <router-outlet></router-outlet>
