@@ -16,6 +16,7 @@ import { AlertModule, BsDropdownModule, ModalModule } from 'ngx-bootstrap';
 import { AboutComponent } from './about/about.component';
 import { DonateComponent } from './donate/donate.component';
 import { DraftInfoModule } from "app/draft-info/draft-info.module";
+import { WindowRefService } from "app/shared/window-ref.service";
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import { DraftInfoModule } from "app/draft-info/draft-info.module";
     BsDropdownModule.forRoot(),
     ModalModule.forRoot()
   ],
-  providers: [ Uploader ],
+  providers: [ Uploader, WindowRefService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

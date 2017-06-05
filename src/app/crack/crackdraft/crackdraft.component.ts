@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { DbService } from "app/shared/db.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { IDraft } from "app/draft";
 import { ICard } from "app/card";
+import { WindowRefService } from "app/shared/window-ref.service";
 
 @Component({
   selector: 'app-crackdraft',
@@ -12,6 +13,9 @@ import { ICard } from "app/card";
 })
 
 export class CrackdraftComponent implements OnInit {
+  @ViewChild('pickText') pickTextElement: ElementRef;
+  private _window: Window;
+
   draftId: string;
   draftData: IDraft;
   errorMessage: string;
@@ -34,7 +38,10 @@ export class CrackdraftComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
-              private _dbService: DbService) { }
+              private _dbService: DbService,
+              private _windowRef: WindowRefService) {
+                this._window = _windowRef.nativeWindow;
+               }
 
   ngOnInit() {
     this.sub = this._route.params.subscribe(
@@ -74,7 +81,7 @@ export class CrackdraftComponent implements OnInit {
   onCardClicked(cardIndex:number, cardName:string):void {
     this.myPickedIndex.push(cardIndex);
     this.myPickedCardNames.push(cardName);
-    
+    this._window.scrollTo(0, this.pickTextElement.nativeElement.offsetTop - 15);
     this.currentPick++;
 
     if (this.currentPick > 8) {

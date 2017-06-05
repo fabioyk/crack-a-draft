@@ -6,6 +6,7 @@ import { CardService } from './card.service';
 import { DbService } from './db.service';
 import { UtilsService } from './utils.service';
 import { TooltipModule } from "ngx-bootstrap";
+import { WindowRefService } from './window-ref.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { TooltipModule } from "ngx-bootstrap";
     CardComponent
   ],
   declarations: [ CardComponent ],
-  providers: [CardService, DbService, UtilsService]
+  providers: [CardService, DbService, UtilsService, WindowRefService]
 })
 export class SharedModule { }
