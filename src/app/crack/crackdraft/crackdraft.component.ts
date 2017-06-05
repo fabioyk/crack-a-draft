@@ -76,7 +76,7 @@ export class CrackdraftComponent implements OnInit {
   onCardClicked(cardIndex:number, cardName:string):void {
     this.myPickedIndex.push(cardIndex);
     this.myPickedCardNames.push(cardName);
-    this.simplePageScrollService.scrollToElement('#pickMsg', 0);
+    this.simplePageScrollService.scrollToElement('#pickMsg', -15);
     this.currentPick++;
 
     if (this.currentPick > 8) {
