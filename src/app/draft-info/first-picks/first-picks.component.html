@@ -1,5 +1,5 @@
 <div class="container-fluid" >
-  <span>The first 8 picks for the submitter and all crack a drafts done for this draft:</span>
+  
   <div class='pull-right'>
     <button class='btn btn-primary' 
             (click)='setAllAccordions(true)'
@@ -9,29 +9,30 @@
             [disabled]='crackAccordions.indexOf(true) === -1'>Close All</button>
   </div>
   <hr>
-  <accordion>
-    <accordion-group (click)='onClickAccordion(0)' [isOpen]='crackAccordions[0]'>
-      <div accordion-heading >
-        {{draftData.draft.drafter}}'s Picks 
-        <i class='pull-right float-xs-right glyphicon'
+  <div class="panel panel-default">
+    <div class="panel-heading clickable" (click)='onClickAccordion(0)'>
+      {{draftData.draft.drafter}}'s Picks
+      <i class='pull-right float-xs-right glyphicon'
       [ngClass]="{'glyphicon-chevron-down': crackAccordions[0], 'glyphicon-chevron-right': !crackAccordions[0]}"></i>
-      </div>
+    </div>
+    <div class="panel-body" *ngIf='crackAccordions[0]'>
       <app-card *ngFor='let pick of (draftData.draft.picks.slice(0,8)); let i = index'
         [cardName]='draftData.draft.packs[i][pick]'>
       </app-card>
-    </accordion-group>
-    <accordion-group *ngFor='let crack of draftData.draft.cracks; let crackIndex = index'
-                      class='accordion-group'
-                      (click)='onClickAccordion(crackIndex+1)' [isOpen]='crackAccordions[crackIndex+1]'>
-      <div accordion-heading>
-        #{{crackIndex+1}}, Archetype: {{crack.archetype}}
-        <i class='pull-right float-xs-right glyphicon'
+    </div>
+  </div>
+
+  <div class="panel panel-default" 
+       *ngFor='let crack of draftData.draft.cracks; let crackIndex = index'>
+    <div class="panel-heading clickable" (click)='onClickAccordion(crackIndex+1)'>
+      #{{crackIndex+1}}, Archetype: {{crack.archetype}}
+      <i class='pull-right float-xs-right glyphicon'
       [ngClass]="{'glyphicon-chevron-down': crackAccordions[crackIndex+1], 'glyphicon-chevron-right': !crackAccordions[crackIndex+1]}"></i>
-      </div>
+    </div>
+    <div class="panel-body" *ngIf='crackAccordions[crackIndex+1]'>
       <app-card *ngFor='let pickNumber of crack.picks; let packIndex = index'
-          [cardName]='draftData.draft.packs[packIndex][pickNumber]'
-        >
+          [cardName]='draftData.draft.packs[packIndex][pickNumber]'>
       </app-card>
-    </accordion-group>
-  </accordion>
+    </div>
+  </div>
 </div>

@@ -4,7 +4,7 @@ import { CrackdraftComponent } from './crackdraft/crackdraft.component';
 import { FormatChooserComponent } from './format-chooser/format-chooser.component';
 import { SharedModule } from "app/shared/shared.module";
 import { RouterModule } from "@angular/router";
-import { AlertModule, TabsModule, AccordionModule, ButtonsModule, TooltipModule } from "ngx-bootstrap";
+import { AlertModule, TabsModule, ButtonsModule, TooltipModule } from "ngx-bootstrap";
 import {BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
@@ -23,7 +23,6 @@ import { DraftModule } from "app/draft/draft.module";
     ]),
     AlertModule.forRoot(),
     TabsModule.forRoot(),
-    AccordionModule.forRoot(),
     ButtonsModule.forRoot(),
     TooltipModule.forRoot(),
     BrowserModule, BrowserAnimationsModule, NgxChartsModule

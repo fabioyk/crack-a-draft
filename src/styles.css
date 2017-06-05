@@ -10,6 +10,10 @@ body {
   min-height: 100%;
 }
 
+a {
+  cursor: pointer;
+}
+
 .panel-group .panel {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -22,4 +26,8 @@ body {
 
 .stylized-font {
   font-family: 'Hammersmith One', sans-serif;
+}
+
+.clickable {
+  cursor: pointer;
 }

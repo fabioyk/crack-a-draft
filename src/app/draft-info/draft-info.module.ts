@@ -9,7 +9,7 @@ import { FirstPicksComponent } from './first-picks/first-picks.component';
 import { SharedModule } from "app/shared/shared.module";
 import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
-import { AlertModule, TabsModule, AccordionModule, ButtonsModule, TooltipModule } from "ngx-bootstrap";
+import { AlertModule, TabsModule, ButtonsModule, TooltipModule } from "ngx-bootstrap";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -27,7 +27,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ]),
     AlertModule.forRoot(),
     TabsModule.forRoot(),
-    AccordionModule.forRoot(),
     ButtonsModule.forRoot(),
     TooltipModule.forRoot(),
     BrowserModule, BrowserAnimationsModule, NgxChartsModule
