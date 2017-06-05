@@ -14,7 +14,7 @@ import { ICard } from "app/card";
 
 @Injectable()
 export class DbService {
-  private _apiUrl = 'https://crack-a-draft.herokuapp.com/api/';
+  private _apiUrl = 'https://crack-a-draft.glitch.me/api/';
 
   constructor(private _http: Http) { }
 
@@ -26,7 +26,8 @@ export class DbService {
   }
 
   getCardsInfo(cardNameArray:string[]):Observable<ICard[]> {
-    let queryUrl = this._apiUrl + 'card?array=' + JSON.stringify(cardNameArray);
+
+    let queryUrl = this._apiUrl + 'card?array=' + cardNameArray.join('|*|*|');
     return this._http.get(queryUrl)
       .map((response: Response) => <ICard[]> response.json())
       .catch(this.handleError);
