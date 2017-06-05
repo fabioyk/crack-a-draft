@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { IDraft } from "app/draft";
 import { ICard } from "app/card";
+import { SimplePageScrollService } from "ng2-simple-page-scroll/ng2-simple-page-scroll";
 
 @Component({
   selector: 'app-crackdraft',
@@ -34,7 +35,8 @@ export class CrackdraftComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
-              private _dbService: DbService) { }
+              private _dbService: DbService,
+              private simplePageScrollService: SimplePageScrollService) { }
 
   ngOnInit() {
     this.sub = this._route.params.subscribe(
@@ -74,7 +76,7 @@ export class CrackdraftComponent implements OnInit {
   onCardClicked(cardIndex:number, cardName:string):void {
     this.myPickedIndex.push(cardIndex);
     this.myPickedCardNames.push(cardName);
-
+    this.simplePageScrollService.scrollToElement('#pickMsg', 0);
     this.currentPick++;
 
     if (this.currentPick > 8) {

@@ -16,6 +16,7 @@ import { AlertModule, BsDropdownModule, ModalModule } from 'ngx-bootstrap';
 import { AboutComponent } from './about/about.component';
 import { DonateComponent } from './donate/donate.component';
 import { DraftInfoModule } from "app/draft-info/draft-info.module";
+import {Ng2SimplePageScrollModule} from 'ng2-simple-page-scroll/ng2-simple-page-scroll';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { DraftInfoModule } from "app/draft-info/draft-info.module";
     CrackModule,
     DraftSearchModule,
     DraftInfoModule,
+    Ng2SimplePageScrollModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent},
       { path: 'donate', component: DonateComponent}
