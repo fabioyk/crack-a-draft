@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { DbService } from "app/shared/db.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { IDraft } from "app/draft";
 import { ICard } from "app/card";
 import { SimplePageScrollService } from "ng2-simple-page-scroll/ng2-simple-page-scroll";
+import { DOCUMENT } from "@angular/platform-browser/";
 
 @Component({
   selector: 'app-crackdraft',
@@ -36,7 +37,8 @@ export class CrackdraftComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
               private _router: Router,
               private _dbService: DbService,
-              private simplePageScrollService: SimplePageScrollService) { }
+              private simplePageScrollService: SimplePageScrollService,
+              @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit() {
     this.sub = this._route.params.subscribe(
