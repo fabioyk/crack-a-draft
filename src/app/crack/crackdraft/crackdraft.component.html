@@ -32,8 +32,8 @@
 </div>
 <div class="container" *ngIf='currentState === 2'>
   <h3>Your 8 picks:</h3>
-  <app-card *ngFor='let card of myPickedCards'
-      [cardName]='card.name'>
+  <app-card *ngFor='let card of myPickedCardNames'
+      [cardName]='card'>
   </app-card>
   <h3>Which colors do you think you're going to play?</h3>
   <div class="btn-group form-group">
