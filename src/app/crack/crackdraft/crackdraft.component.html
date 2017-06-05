@@ -20,12 +20,12 @@
       </app-card>
     </div>      
   </div>
-  <div class="picked-cards" *ngIf='myPickedCardNames.length >= 1'>
+  <div class="picked-cards" *ngIf='myPickedCards.length >= 1'>
     <hr>
     <div class="container-fluid">
       <h3>Picked Cards:</h3>
-      <app-card *ngFor='let card of myPickedCardNames'
-        [cardName]='card'>
+      <app-card *ngFor='let card of myPickedCards'
+        [cardName]='card.name'>
       </app-card>
     </div>
   </div>
