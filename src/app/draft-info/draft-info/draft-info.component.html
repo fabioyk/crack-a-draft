@@ -2,7 +2,7 @@
   <div class="loading" *ngIf='!draftData'>
     <span *ngIf='!errorMessage'>Loading draft~</span>
     <alert type="danger" *ngIf='errorMessage'>
-      Draft not found
+      Something went wrong, please try again.
     </alert>
   </div>
   <div *ngIf='draftData'>    
