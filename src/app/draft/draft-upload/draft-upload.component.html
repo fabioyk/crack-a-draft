@@ -17,7 +17,7 @@
       </label>      
     <button class='btn btn-primary pull-right' 
             (click)="submit($event)"
-            [disabled]="isSubmitting || !draftUploadField.files[0]">Upload</button>
+            [disabled]="isSubmitting">Upload</button>
   </div>
   <div class="files-uploaded" *ngIf='draftIds'>
     Drafts uploaded:

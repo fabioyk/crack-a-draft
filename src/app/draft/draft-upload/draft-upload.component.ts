@@ -26,28 +26,32 @@ export class DraftUploadComponent implements OnInit {
     this.isSubmitting = false;
   }
 
-  submit() {
-    this.isSubmitting = true;
+  submit() {    
     let uploadFile = (<HTMLInputElement>window.document.getElementById('draftUploadField')).files[0];
 
-    let myUploadItem = new DraftUploadItem(uploadFile, this.isAnonymous);
-    //myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
-    this.uploaderService.onCompleteUpload = (item, response, status, headers) => {
-      this.isSubmitting = false;
-      if (response && !response.error) {
-        if (response.ids.length === 1) {
-          this._router.navigate(['/draft', response.ids[0]]);
-        } else {
-          this.draftIds = response.ids;
-          this.filename = response.filename;
-          this.uploaded.emit(response.ids.length.toString());
+    if (uploadFile) {
+      this.isSubmitting = true;
+      let myUploadItem = new DraftUploadItem(uploadFile, this.isAnonymous);
+      //myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
+      this.uploaderService.onCompleteUpload = (item, response, status, headers) => {
+        this.isSubmitting = false;
+        if (response && !response.error) {
+          if (response.ids.length === 1) {
+            this._router.navigate(['/draft', response.ids[0]]);
+          } else {
+            this.draftIds = response.ids;
+            this.filename = response.filename;
+            this.uploaded.emit(response.ids.length.toString());
+          }
+        } else if (response.error) {
+          this.errorMessage = response.error;
         }
-      } else if (response.error) {
-        this.errorMessage = response.error;
       }
+
+      this.uploaderService.upload(myUploadItem);    
     }
 
-    this.uploaderService.upload(myUploadItem);
+    
   }
   
   cleanup() {
