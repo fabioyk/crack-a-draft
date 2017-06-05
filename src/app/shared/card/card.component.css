@@ -35,7 +35,7 @@
     left: 0;
     margin-top: -19%;
     margin-left: -13%;
-    z-index: 10;
+    z-index: 5;
     border-radius: 10px;
 }
 
@@ -62,19 +62,18 @@
   }
 }
 
-/*.cutout-container {
-  position: relative;
-  min-height: 99px;
-  width: 222px;
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+  z-index: 10;
+  cursor: default;
+  pointer-events: none;
 }
-
-.cutout {
-  position: absolute;
-  clip-path: inset(36px 18px 139px 18px);
-  -webkit-clip-path: inset(36px 18px 139px 18px);
-  -moz-clip-path: inset(36px 18px 139px 18px);
-  margin-top: -57px;
-}*/
 
 .cutout-container {
   display: inline-block;

@@ -14,7 +14,7 @@
   title={{altTitle}}
   (click)='onClick()'
   >
-<h1 *ngIf='pickrate'>{{pickrate}}%</h1>
+<h1 class='noselect' *ngIf='pickrate'>{{pickrate}}%</h1>
 <div class='card-string' *ngIf='!pile'>{{cardName}}</div>
 </div>
 <div class="cutout-container" *ngIf='cutout'>
