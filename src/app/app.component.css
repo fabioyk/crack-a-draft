@@ -11,3 +11,15 @@ footer {
   left: 0;
 }
 
+.goto-top-button {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 15;
+  background-color: #EEE;
+  border: 2px solid #333;
+  color: steelblue;
+  border-radius: 50%;
+  padding: 3px 11px;
+  font-size: 35px;
+}

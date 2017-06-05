@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { WindowRefService } from "app/shared/window-ref.service";
 
 var self;
 
@@ -9,7 +10,12 @@ var self;
 })
 export class AppComponent {
   @ViewChild('footer') elementView: ElementRef;
-  footerHeight: number;
+  footerHeight: number;  
+  window: Window;
+
+  constructor(private _windowRef: WindowRefService) {
+    this.window = _windowRef.nativeWindow;
+  }
 
   ngOnInit() {
     self = this;
@@ -19,5 +25,9 @@ export class AppComponent {
 
   updateFooterHeight() {
     self.footerHeight = self.elementView.nativeElement.offsetHeight;
+  }
+
+  gotoTop() {
+    this.window.scrollTo(0,0);
   }
 }

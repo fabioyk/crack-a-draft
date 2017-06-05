@@ -5,6 +5,10 @@
   </div>
 </nav>
 <router-outlet></router-outlet>
+<span class='goto-top-button visible-xs-block' 
+      (click)='gotoTop()'>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+</span>
 <div class="footer-container" [style.padding-bottom]='footerHeight + "px"'>
   <footer #footer>
     <p>Created by: Fabio Kubagawa <a href="https://twitter.com/kyong92"><i class="fa fa-twitter" aria-hidden="true"></i></a></p>
