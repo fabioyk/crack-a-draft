@@ -5,6 +5,7 @@ import { DbService } from "app/shared/db.service";
 import { Subscription } from "rxjs/Subscription";
 import { ICrack } from "app/crack";
 import { IFormat } from "app/format";
+import { UtilsService } from "app/shared/utils.service";
 
 @Component({
   selector: 'app-draft-info',
@@ -14,6 +15,8 @@ import { IFormat } from "app/format";
 export class DraftInfoComponent implements OnInit {
   draftId: string;
   crackId: string;
+  draftDate: string;
+  submitDate: string;
   draftData: IDraft;
   crackData: ICrack;
   errorMessage: string;
@@ -25,7 +28,8 @@ export class DraftInfoComponent implements OnInit {
   
   constructor(private _route: ActivatedRoute,
               private _router: Router,
-              private _dbService: DbService) { }
+              private _dbService: DbService,
+              private _utilsService: UtilsService) { }
 
   ngOnInit() {
     this.sub = this._route.params.subscribe(
@@ -52,6 +56,14 @@ export class DraftInfoComponent implements OnInit {
           this.errorMessage = draft.error;
         } else {
           this.draftData = draft;
+          var date:Date = new Date(draft.draft.modifiedDate);
+          var submitDate:Date = new Date(draft.draft.submitDate);
+          this.submitDate = this._utilsService.formatDate(submitDate);
+          if (date && date.valueOf() > 0) {
+            this.draftDate = this._utilsService.formatDate(date);
+          } else {
+            this.draftDate = '';
+          }
           if (this.crackId) {
             this._dbService.getFormats()
               .subscribe(formats => {

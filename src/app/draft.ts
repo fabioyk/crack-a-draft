@@ -7,6 +7,7 @@ export interface IDraft {
     _id: string;
     drafter: string;
     submitDate: Date;
+    modifiedDate: Date;
     format: string;
     packs: [[string]];
     picks: [number];

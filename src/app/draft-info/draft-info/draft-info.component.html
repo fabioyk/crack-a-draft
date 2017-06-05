@@ -7,6 +7,7 @@
   </div>
   <div *ngIf='draftData'>    
     <h2>{{draftData.draft.drafter}}'s {{draftData.format.name}} Draft</h2>
+    <h4 *ngIf='draftDate'>Drafted on {{draftDate}}</h4>
     <form class="form-inline">
       <div class="form-group">
         <button class='btn btn-default crack-button' [routerLink]="['/crack', draftData.draft._id]">
