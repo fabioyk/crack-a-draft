@@ -14,7 +14,7 @@ import { ICard } from "app/card";
 
 @Injectable()
 export class DbService {
-  private _apiUrl = 'https://crack-a-draft.glitch.me/api/';
+  private _apiUrl = 'https://crack-a-draft.herokuapp.com/api/';
 
   constructor(private _http: Http) { }
 
