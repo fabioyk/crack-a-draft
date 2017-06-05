@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { DbService } from "app/shared/db.service";
 import { Subscription } from "rxjs/Subscription";
 import { ICrack } from "app/crack";
+import { IFormat } from "app/format";
 
 @Component({
   selector: 'app-draft-info',
@@ -17,6 +18,8 @@ export class DraftInfoComponent implements OnInit {
   crackData: ICrack;
   errorMessage: string;
   private sub: Subscription;
+
+  formatName:string;
 
   isDraftPicksStartingTab: boolean;
   
@@ -35,7 +38,7 @@ export class DraftInfoComponent implements OnInit {
             this.getDraft(id, crackId);
 
             if (this.crackId) {
-              this.isDraftPicksStartingTab = false;
+              this.isDraftPicksStartingTab = false;              
             } else {
               this.isDraftPicksStartingTab = true;
             }
@@ -49,6 +52,20 @@ export class DraftInfoComponent implements OnInit {
           this.errorMessage = draft.error;
         } else {
           this.draftData = draft;
+          if (this.crackId) {
+            this._dbService.getFormats()
+              .subscribe(formats => {
+                if (formats[0].error) {
+                  this.errorMessage = formats[0].error;
+                } else {
+                  formats.forEach((format) => {
+                    if (format.mtgoName === this.draftData.format.mtgoName) {
+                      this.formatName = format.mtgoName + ',' + format.drafts;
+                    }
+                  })
+                }
+              });
+          }
           if (crackId && draft.draft.cracks.length > 0) {
             draft.draft.cracks.forEach((eachCrack, i) => {
               if (eachCrack.id === crackId) {
@@ -56,7 +73,19 @@ export class DraftInfoComponent implements OnInit {
                 return;
               }              
             });
-          }
+          }          
+        }          
+      },
+    error => this.errorMessage = <any>error);
+  }
+
+  gotoAnotherDraft() {
+    this._dbService.getDraftByFormat(this.formatName)
+      .subscribe(draft =>  {
+        if (draft.error) {
+          this.errorMessage = draft.error;
+        } else {          
+          this._router.navigate(['/crack', draft.draft._id]);
         }          
       },
     error => this.errorMessage = <any>error);

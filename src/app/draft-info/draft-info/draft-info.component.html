@@ -5,12 +5,25 @@
       Draft not found
     </alert>
   </div>
-  <div *ngIf='draftData'>
+  <div *ngIf='draftData'>    
     <h2>{{draftData.draft.drafter}}'s {{draftData.format.name}} Draft</h2>
-    <p><a [routerLink]="['/crack', draftData.draft._id]">
-      <img src="assets/crackadraft_logo_small.png" class="small-logo" alt="logo"> Crack this draft</a>
+    <form class="form-inline">
+      <div class="form-group">
+        <button class='btn btn-default crack-button' [routerLink]="['/crack', draftData.draft._id]">
+          <img src="assets/crackadraft_logo_small.png" class="small-logo" alt="logo"> Crack this draft
+        </button> 
+      </div>
+      <div class="form-group">
+        <button 
+          class='btn btn-default'
+          *ngIf='crackId && formatName'
+          (click)='gotoAnotherDraft()'>Do another {{draftData.format.name}} Draft!
+        </button>
+      </div>
+    </form>
   </div>
 </div>
+<hr>
 <div class="container-fluid">
   <tabset #staticTabs type='pills' *ngIf='draftData'>
     <tab heading='Draft Picks' [active]='isDraftPicksStartingTab'>
