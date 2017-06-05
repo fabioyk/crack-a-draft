@@ -4,8 +4,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { IDraft } from "app/draft";
 import { ICard } from "app/card";
+<<<<<<< HEAD
 import { SimplePageScrollService } from "ng2-simple-page-scroll/ng2-simple-page-scroll";
 import { DOCUMENT } from "@angular/platform-browser/";
+=======
+>>>>>>> parent of f4b6cf7... scroll to top when picking cards on cracks
 
 @Component({
   selector: 'app-crackdraft',
@@ -36,9 +39,13 @@ export class CrackdraftComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
+<<<<<<< HEAD
               private _dbService: DbService,
               private simplePageScrollService: SimplePageScrollService,
               @Inject(DOCUMENT) private document: Document) { }
+=======
+              private _dbService: DbService) { }
+>>>>>>> parent of f4b6cf7... scroll to top when picking cards on cracks
 
   ngOnInit() {
     this.sub = this._route.params.subscribe(
@@ -78,7 +85,7 @@ export class CrackdraftComponent implements OnInit {
   onCardClicked(cardIndex:number, cardName:string):void {
     this.myPickedIndex.push(cardIndex);
     this.myPickedCardNames.push(cardName);
-    this.simplePageScrollService.scrollToElement('#pickMsg', -15);
+    
     this.currentPick++;
 
     if (this.currentPick > 8) {
