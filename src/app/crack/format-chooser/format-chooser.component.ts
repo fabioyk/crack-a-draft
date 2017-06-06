@@ -3,6 +3,7 @@ import { DbService } from "app/shared/db.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { IFormat } from "app/format";
+import { UtilsService } from "app/shared/utils.service";
 
 
 @Component({
@@ -17,7 +18,8 @@ export class FormatChooserComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
-              private _dbService: DbService) { }
+              private _dbService: DbService,
+              private _utils: UtilsService) { }
 
   ngOnInit() {
     this.load();
@@ -32,7 +34,7 @@ export class FormatChooserComponent implements OnInit {
         if (formats[0].error) {
           this.errorMessage = formats[0].error;
         } else {
-          this.formatList = formats;
+          this.formatList = formats.sort(this._utils.sortFormatList);
           let draftCount = formats.reduce((prev, curr) => prev + curr.drafts, 0);
           this.formatList.push({
             name: 'All Random',
