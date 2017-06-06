@@ -91,8 +91,8 @@ export class CrackdraftComponent implements OnInit {
         this.myPickedCards = cards;
         this.updateColorCount(this.myPickedCardNames, this.myPickedCards);
         this.setColorCheckboxesDefault();        
-      });   
-    }    
+      });
+    }
   }
 
   updateColorCount(cardNames:string[], cardArray:ICard[]):void {

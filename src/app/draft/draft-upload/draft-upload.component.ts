@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Observable";
 import { Uploader } from "angular2-http-file-upload";
 import { DraftUploadItem } from "app/draft/draft-upload/draft-upload-item";
 import { Router, ActivatedRoute } from '@angular/router';
+import { DbService } from "app/shared/db.service";
 
 @Component({
   selector: 'app-draft-upload',
@@ -20,7 +21,8 @@ export class DraftUploadComponent implements OnInit {
 
   constructor(public uploaderService: Uploader,
               private _router: Router,
-              private _route: ActivatedRoute) { }
+              private _route: ActivatedRoute,
+              private _dbService: DbService) { }
 
   ngOnInit() {
     this.isSubmitting = false;
@@ -35,6 +37,7 @@ export class DraftUploadComponent implements OnInit {
       //myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
       this.uploaderService.onCompleteUpload = (item, response, status, headers) => {
         this.isSubmitting = false;
+        this._dbService.clearFormatCache();
         if (typeof response === 'string') {
           response = JSON.parse(response);
         }
@@ -52,9 +55,7 @@ export class DraftUploadComponent implements OnInit {
       }
 
       this.uploaderService.upload(myUploadItem);    
-    }
-
-    
+    }    
   }
   
   cleanup() {
