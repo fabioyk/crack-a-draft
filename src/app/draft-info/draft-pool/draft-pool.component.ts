@@ -40,9 +40,8 @@ export class DraftPoolComponent implements OnInit {
       params => {
         if (this.draftData) {
           this.createCardPoolArray(this.draftData, params['d']);
-          this.sortCardPoolArray('color');
-        }
-                   
+          this.sortCardPoolArray('cmc');
+        }                   
     });
   }
 
