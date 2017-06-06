@@ -12,6 +12,7 @@ export interface IDraft {
     packs: [[string]];
     picks: [number];
     cracks: [ICrack];
+    numCracks: number;
   };
   format: IFormat;
   cards: [ICard]
