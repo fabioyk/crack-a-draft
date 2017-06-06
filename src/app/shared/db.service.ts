@@ -147,7 +147,7 @@ export class DbService {
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON
     let options= new RequestOptions({ headers: headers });
     if (this._featuredDraftsList.indexOf(draftId) !== -1) {
-      this.clearFeaturedDraftsCache();
+      this._featuredDrafts = null;
     }    
     return this._http.post(this._apiUrl + 'crack',
       {
@@ -166,12 +166,10 @@ export class DbService {
       .catch(this.handleError);
   }
 
-  clearFormatCache() {
+  clearCacheForDraftUpload() {
     this._formats = null;
-  }
-
-  clearFeaturedDraftsCache() {
-    this._featuredDrafts = null;
+    this._lastUploadedDrafts = null;
+    this._draftCount = null;
   }
 
   private handleError(error: Response) {

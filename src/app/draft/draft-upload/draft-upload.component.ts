@@ -37,7 +37,7 @@ export class DraftUploadComponent implements OnInit {
       //myUploadItem.formData = { FormDataKey: 'Form Data Value' };  // (optional) form data can be sent with file
       this.uploaderService.onCompleteUpload = (item, response, status, headers) => {
         this.isSubmitting = false;
-        this._dbService.clearFormatCache();
+        this._dbService.clearCacheForDraftUpload();
         if (typeof response === 'string') {
           response = JSON.parse(response);
         }
