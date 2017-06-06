@@ -1,4 +1,4 @@
-<h3>Main Deck ({{cardPoolTop.length}} card{{cardPoolTop.length !== 1 ? 's' : ''}})</h3>
+<h3>Main Deck ({{cardPools[0].length}} card{{cardPools[0].length !== 1 ? 's' : ''}})</h3>
 <div class="pool-buttons">
   <form class="form-inline">
     <div class="form-group">
@@ -25,7 +25,7 @@
 <hr>
 <div class="top-pool pool">
   <div class="pool-normal" *ngIf='!isColumnView'>
-    <app-card *ngFor='let card of cardPoolTop'
+    <app-card *ngFor='let card of cardPools[0]'
       [cardName]='card.name'
       (click)='onCardClicked(card.name, true)'
       [clickable]='true'
@@ -33,8 +33,8 @@
     </app-card>
   </div>
   <div class="pool-stacked" *ngIf='isColumnView'>  
-    <div class="column" *ngFor='let cardColumn of cardPoolColumnsTop; let i = index'>
-      <span *ngIf='sortBy !== "name"'>{{cardPoolColumnNamesTop[i]}} ({{cardColumn.length}})</span>
+    <div class="column" *ngFor='let cardColumn of cardPoolsColumns[0]; let i = index'>
+      <span *ngIf='sortBy !== "name"'>{{cardPoolsColumnNames[0][i]}} ({{cardColumn.length}})</span>
       <app-card *ngFor='let card of cardColumn; let cardIndex = index'
         [cardName]='card.name'
         [stacked]='cardIndex !== cardColumn.length-1'
@@ -47,11 +47,11 @@
     </div>
   </div>
 </div>
-<div class="bottom-pool pool" *ngIf='cardPoolBottom.length > 0'>
+<div class="bottom-pool pool" *ngIf='cardPools[1].length > 0'>
   <hr>
-  <h3>Sideboard ({{cardPoolBottom.length}} card{{cardPoolBottom.length !== 1 ? 's' : ''}})</h3>
+  <h3>Sideboard ({{cardPools[1].length}} card{{cardPools[1].length !== 1 ? 's' : ''}})</h3>
   <div class="pool-normal" *ngIf='!isColumnView'>
-    <app-card *ngFor='let card of cardPoolBottom'
+    <app-card *ngFor='let card of cardPools[1]'
       [cardName]='card.name'
       (click)='onCardClicked(card.name, false)'
       [clickable]='true'
@@ -59,8 +59,8 @@
     </app-card>
   </div>
   <div class="pool-stacked" *ngIf='isColumnView'>  
-    <div class="column" *ngFor='let cardColumn of cardPoolColumnsBottom; let i = index'>
-      <span *ngIf='sortBy !== "name"'>{{cardPoolColumnNamesBottom[i]}} ({{cardColumn.length}})</span>
+    <div class="column" *ngFor='let cardColumn of cardPoolsColumns[1]; let i = index'>
+      <span *ngIf='sortBy !== "name"'>{{cardPoolsColumnNames[1][i]}} ({{cardColumn.length}})</span>
       <app-card *ngFor='let card of cardColumn; let cardIndex = index'
         [cardName]='card.name'
         [stacked]='cardIndex !== cardColumn.length-1'

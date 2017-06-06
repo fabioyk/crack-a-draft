@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Location } from '@angular/common';
 import { ICard } from "app/card";
 import { IDraft } from "app/draft";
+import { Subscription } from "rxjs/Subscription";
+import { Router, ActivatedRoute } from "@angular/router/";
+import { UtilsService } from "app/shared/utils.service";
 
 @Component({
   selector: 'app-draft-pool',
@@ -10,30 +14,36 @@ import { IDraft } from "app/draft";
 export class DraftPoolComponent implements OnInit {
   @Input() draftData: IDraft;
   cardPool: ICard[];
+  cardPoolSwitches: boolean[];
 
-  cardPoolTop: ICard[];
-  cardPoolBottom: ICard[];
-
-  cardPoolColumnNamesTop: string[];
-  cardPoolColumnsTop: ICard[][];
-  cardPoolColumnNamesBottom: string[];
-  cardPoolColumnsBottom: ICard[][];
+  cardPools: ICard[][];
+  cardPoolsColumnNames: string[][];
+  cardPoolsColumns: ICard[][][];
   
   sortBy: string;
   isColumnView: boolean;
   hoveredCard: string;
 
   isLeft:boolean;
+  private sub:Subscription;
 
-  constructor() { }
+  constructor(private _route: ActivatedRoute,
+              private _router: Router,
+              private _location: Location,
+              private _utils:UtilsService) { }
 
   ngOnInit() {
     this.isLeft = false;
-    this.isColumnView = false;
-    if (this.draftData) {
-      this.createCardPoolArray(this.draftData);
-      this.sortCardPoolArray('color');
-    }
+    this.isColumnView = false;    
+
+    this.sub = this._route.queryParams.subscribe(
+      params => {
+        if (this.draftData) {
+          this.createCardPoolArray(this.draftData, params['d']);
+          this.sortCardPoolArray('color');
+        }
+                   
+    });
   }
 
   onMouseOver(card:ICard) {
@@ -45,10 +55,9 @@ export class DraftPoolComponent implements OnInit {
   }
 
    sortCardPoolArray(sortBy:string) {
-    this.cardPoolColumnNamesTop = [];
-    this.cardPoolColumnNamesBottom = [];
-    this.cardPoolColumnsTop = [];
-    this.cardPoolColumnsBottom = [];
+    this.cardPoolsColumnNames = [[],[]];    
+    this.cardPoolsColumns = [[],[]];
+
     this.sortBy = sortBy;
     const sortingObject = {
       name: {
@@ -77,12 +86,11 @@ export class DraftPoolComponent implements OnInit {
         fn: this.sortByType
       }
     }
-    this.cardPoolTop.sort(sortingObject[sortBy].fullFn);
-    this.separateColumns(this.cardPoolTop, sortingObject[sortBy].fn, sortBy, this.cardPoolColumnsTop, this.cardPoolColumnNamesTop);
 
-    this.cardPoolBottom.sort(sortingObject[sortBy].fullFn);
-    this.separateColumns(this.cardPoolBottom, sortingObject[sortBy].fn, sortBy, this.cardPoolColumnsBottom, this.cardPoolColumnNamesBottom);
-
+    this.cardPools.forEach((cardPool, i) => {
+      cardPool.sort(sortingObject[sortBy].fullFn);
+      this.separateColumns(cardPool, sortingObject[sortBy].fn, sortBy, this.cardPoolsColumns[i], this.cardPoolsColumnNames[i]);
+    });
   }
 
   separateColumns(sortedCardPool:ICard[], mainSorter:Function, attribute:string, cardPoolColumnsArray:ICard[][], cardPoolColumnNamesArray:string[]) {    
@@ -239,16 +247,20 @@ export class DraftPoolComponent implements OnInit {
     return sortN;
   }
 
-  createCardPoolArray(draftData:IDraft) {
+  createCardPoolArray(draftData:IDraft, deckCode:string) {
     this.cardPool = [];
-    this.cardPoolTop = [];
-    this.cardPoolBottom = [];
+    this.cardPoolSwitches = this.translateDeckCode(deckCode);
+    
+    this.cardPools = Array(2);
+    this.cardPools[0] = [];
+    this.cardPools[1] = [];
+
     let cardNameArr = draftData.draft.packs.map((pack, index) => pack[draftData.draft.picks[index]]);
-    cardNameArr.map((cardName) => {
+    cardNameArr.map((cardName, index) => {
       draftData.cards.forEach((cardData) => {
         if (cardData.name === cardName) {
           this.cardPool.push(cardData);
-          this.cardPoolTop.push(cardData);
+          this.cardPools[this.cardPoolSwitches[index] ? 0 : 1].push(cardData);
           return;
         }
       })
@@ -256,28 +268,58 @@ export class DraftPoolComponent implements OnInit {
   }
 
   onCardClicked(name:string, isTop:boolean) {
-    let card:ICard;
-    let cardIndex:number;
-    if (isTop) {
-      this.cardPoolTop.forEach((eachCard, i) => {
-        if (eachCard.name === name) {
-          cardIndex = i;
+    let cardIndex:number = -1;
+    const poolIndex = isTop ? 0 : 1;
+
+    this.cardPools[poolIndex].forEach((eachCard, i) => {
+      if (eachCard.name === name) {
+        cardIndex = i;
+      }
+    });
+
+    if (cardIndex >= 0) {
+      let card = this.cardPools[poolIndex][cardIndex];
+      this.cardPools[poolIndex].splice(cardIndex, 1);
+      this.cardPools[(poolIndex + 1) % 2].push(card);
+      
+
+      let switched = false;
+      this.cardPool.forEach((eachCard, i) => {
+        if (!switched && eachCard.name === name && this.cardPoolSwitches[i] === isTop) {
+          this.cardPoolSwitches[i] = !this.cardPoolSwitches[i];
+          switched = true;
         }
       });
-      card = this.cardPoolTop[cardIndex];
-      this.cardPoolTop.splice(cardIndex, 1);
-      this.cardPoolBottom.push(card);
-    } else {
-      this.cardPoolBottom.forEach((eachCard, i) => {
-        if (eachCard.name === name) {
-          cardIndex = i;
-        }
-      });
-      card = this.cardPoolBottom[cardIndex];
-      this.cardPoolBottom.splice(cardIndex, 1);
-      this.cardPoolTop.push(card);
-    }
+    }    
+
+    this.updateUrl();
     this.sortCardPoolArray(this.sortBy);
+  }
+
+  updateUrl() {
+    const code = this.translateBoolArray(this.cardPoolSwitches);
+    let splitUrl = this._location.path(false).split('?');
+    this._location.go(splitUrl[0] + '?d=' + code);
+  }
+  
+  alphanumericAlphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  translateDeckCode(code:string):boolean[] {
+    if (!code) {
+      return Array(45).fill(true);      
+    }
+
+    return this._utils.convertBase(code, this.alphanumericAlphabet, '01')
+               .substr(0, 45)
+               .split('')               
+               .map((number) => number === '1');
+  }
+
+  translateBoolArray(array:boolean[]):string {
+    return this._utils.convertBase(
+      array.reduce((prev, current, index) => 
+         index <= 45 ? prev + (current ? '1' : '0') : prev
+      , '')
+      , '01', this.alphanumericAlphabet);
   }
 
 }

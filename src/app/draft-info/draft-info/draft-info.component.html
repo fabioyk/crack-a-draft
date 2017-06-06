@@ -27,19 +27,19 @@
 <hr>
 <div class="container-fluid">
   <tabset #staticTabs type='pills' *ngIf='draftData'>
-    <tab heading='Draft Picks' [active]='isDraftPicksStartingTab'>
+    <tab heading='Draft Picks' [active]='startingTab[0]'>
       <app-draft-picks
         [draftData]='draftData'>
       </app-draft-picks>
     </tab>
-    <tab heading='Card Pool'>
+    <tab heading='Card Pool' [active]='startingTab[2]'>
       <app-draft-pool
         [draftData]='draftData'>
       </app-draft-pool>
     </tab>
     <tab heading='Pick Rate'
          [disabled]='draftData.draft.cracks.length === 0'
-         [active]='!isDraftPicksStartingTab'>
+         [active]='startingTab[1]'>
       <app-pick-rate
         [draftData]='draftData'
         [crackData]='crackData'

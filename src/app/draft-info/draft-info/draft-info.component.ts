@@ -25,6 +25,7 @@ export class DraftInfoComponent implements OnInit {
   formatName:string;
 
   isDraftPicksStartingTab: boolean;
+  startingTab: boolean[];
   
   constructor(private _route: ActivatedRoute,
               private _router: Router,
@@ -32,20 +33,30 @@ export class DraftInfoComponent implements OnInit {
               private _utilsService: UtilsService) { }
 
   ngOnInit() {
+    this.startingTab = Array(3);
+    this.startingTab.fill(false);
     this.sub = this._route.params.subscribe(
-        params => {
-            let id = params['draftId'];
-            let crackId = params['crackId'];
-            // TODO: validate params
-            this.draftId = id;
-            this.crackId = crackId;
-            this.getDraft(id, crackId);
+      params => {
+        let id = params['draftId'];
+        let crackId = params['crackId'];    
 
-            if (this.crackId) {
-              this.isDraftPicksStartingTab = false;              
+        this.draftId = id;
+        this.crackId = crackId;
+        this.getDraft(id, crackId);
+
+        this.sub = this._route.queryParams.subscribe(
+          params => {
+            let deckCode = params['d'];
+
+            if (deckCode) {
+              this.startingTab[2] = true;
+            } else if (this.crackId) {
+              this.startingTab[1] = true;              
             } else {
-              this.isDraftPicksStartingTab = true;
+              this.startingTab[0] = true;
             }
+          }
+        );
     });
   }
 
