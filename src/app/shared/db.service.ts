@@ -9,14 +9,19 @@ import 'rxjs/add/observable/throw';
 import { IDraft } from "app/draft";
 import { IFormat } from "app/format";
 import { ICard } from "app/card";
-
-
+import { environment } from "environments/environment";
 
 @Injectable()
 export class DbService {
-  private _apiUrl = 'https://crack-a-draft.herokuapp.com/api/';
+  private _apiUrl;
 
-  constructor(private _http: Http) { }
+  constructor(private _http: Http) {
+    if (environment.production) {
+      this._apiUrl = 'https://crack-a-draft.herokuapp.com/api/';
+    } else {
+      this._apiUrl = 'https://crack-a-draft.glitch.me/api/'
+    }
+   }
 
   getCardInfo(cardName:string):Observable<ICard> {
     let queryUrl = this._apiUrl + 'card?name=' + cardName;
