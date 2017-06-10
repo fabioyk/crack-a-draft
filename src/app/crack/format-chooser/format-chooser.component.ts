@@ -33,16 +33,18 @@ export class FormatChooserComponent implements OnInit {
       .subscribe(formats =>  {
         if (formats[0].error) {
           this.errorMessage = formats[0].error;
-        } else {
+        } else {          
           this.formatList = formats.sort(this._utils.sortFormatList);
-          let draftCount = formats.reduce((prev, curr) => prev + curr.drafts, 0);
-          this.formatList.push({
-            name: 'All Random',
-            mtgoName: 'random',
-            drafts: draftCount,
-            error: null
-          });
+          let draftCount = formats.reduce((prev, curr) => prev + curr.drafts, 0);          
           this.chosenFormat = formats[0].mtgoName + ',' + formats[0].drafts;
+          if (this.formatList[this.formatList.length-1].mtgoName !== 'random') {
+            this.formatList.push({
+              name: 'All Random',
+              mtgoName: 'random',
+              drafts: draftCount,
+              error: null
+            });
+          }
         }          
       },
     error => this.errorMessage = <any>error);
