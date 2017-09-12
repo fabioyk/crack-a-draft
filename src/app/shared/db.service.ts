@@ -32,7 +32,8 @@ export class DbService {
 
   constructor(private _http: Http) {
     if (environment.production) {
-      this._apiUrl = 'https://crack-a-draft.herokuapp.com/api/';
+      //this._apiUrl = 'https://crack-a-draft.herokuapp.com/api/';
+      this._apiUrl = 'https://crack-a-draft.glitch.me/api/'      
     } else {
       this._apiUrl = 'https://crack-a-draft.glitch.me/api/'
     }
