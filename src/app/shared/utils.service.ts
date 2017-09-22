@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IFormat } from "app/format";
 
-var availableFormats:string[] = ['C03C03C03', 'C00C00C00', 'C04C04C04', 'C11C11C11', 'HOUHOUAKH',
+var availableFormats:string[] = ['C03C03C03', 'C00C00C00', 'C04C04C04', 'C11C11C11', 
+  'XLNXLNXLN', 'HOUHOUAKH',
   'AKHAKHAKH', 'MM3MM3MM3', 'AERAERKLD', 'KLDKLDKLD', 'EMAEMAEMA',
   'EMNEMNSOI', 'SOISOISOI', 'OGWOGWBFZ', 'BFZBFZBFZ', 'ORIORIORI',
   'MM2MM2MM2', 'DTKDTKFRF', 'FRFKTKKTK', 'KTKKTKKTK', 'M15M15M15',
