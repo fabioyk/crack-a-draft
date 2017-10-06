@@ -25,9 +25,8 @@ export class DbService {
   private _cacheTime = 1000 * 60 * 5;
 
   private _featuredDraftsList = [
-      '5931fdc0dea92400118e0675', '5931fe9c8734e10011abb6b5', 
-      '5931fde3dea92400118e0678', '5931fddddea92400118e0677', '5931fdeddea92400118e067a',
-      '5931fea28734e10011abb6b6', '5931fe968734e10011abb6b4', '5931fe8e8734e10011abb6b3'
+      '59d7ceb3d12e26006b37896b',
+      '59d7ce92d12e26006b378965', '59d7ceaed12e26006b37896a', '59d7cea2d12e26006b378968',
     ];
 
   constructor(private _http: Http) {
