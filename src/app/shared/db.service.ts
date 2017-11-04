@@ -27,6 +27,8 @@ export class DbService {
   private _featuredDraftsList = [
       '59d7ceb3d12e26006b37896b',
       '59d7ce92d12e26006b378965', '59d7ceaed12e26006b37896a', '59d7cea2d12e26006b378968',
+      '59fd6b84aca9b907d855d272',
+      '59fd6b69aca9b907d855d26d', '59fd6b6eaca9b907d855d26e', '59fd6b89aca9b907d855d273'
     ];
 
   constructor(private _http: Http) {
@@ -34,7 +36,7 @@ export class DbService {
       //this._apiUrl = 'https://crack-a-draft.herokuapp.com/api/';
       this._apiUrl = 'https://crack-a-draft.glitch.me/api/'      
     } else {
-      this._apiUrl = 'https://crack-a-draft.glitch.me/api/'
+      this._apiUrl = 'https://crack-a-draft-2.glitch.me/api/'
     }
   }
 

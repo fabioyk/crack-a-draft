@@ -9,7 +9,7 @@ export class DraftUploadItem extends UploadItem {
             //this.url = 'https://crack-a-draft.herokuapp.com/api/';
             this.url = 'https://crack-a-draft.glitch.me/api/'            
         } else {
-            this.url = 'https://crack-a-draft.glitch.me/api/'
+            this.url = 'https://crack-a-draft-2.glitch.me/api/'
         }      
         this.url += 'draft?date=' + file.lastModified;
         if (isAnonymous) {
