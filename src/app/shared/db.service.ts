@@ -27,6 +27,8 @@ export class DbService {
   private _featuredDraftsList = [
       '5a749ad0dd13d7006b0076ed',
       '5a749accdd13d7006b0076ec', '5a749ad5dd13d7006b0076ee', '5a749adadd13d7006b0076ef',
+      '5a75fbdfdd13d7006b0077e5',
+      '5a75fbecdd13d7006b0077e8', '5a75fbf5dd13d7006b0077ea', '5a75fbdbdd13d7006b0077e4'
     ];
 
   constructor(private _http: Http) {
